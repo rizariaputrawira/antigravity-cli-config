@@ -17,22 +17,22 @@ Install on any clean machine in seconds without needing to clone the repository 
 
 ### Linux & macOS (Bash / Zsh)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<username>/antigravity-config/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.sh | bash
 ```
 
 *With custom workspace directory:*
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<username>/antigravity-config/main/install.sh | bash -s -- --workspace=/path/to/workspaces
+curl -fsSL https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.sh | bash -s -- --workspace=/path/to/workspaces
 ```
 
 ### Windows (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/<username>/antigravity-config/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.ps1 | iex
 ```
 
 *With custom workspace directory:*
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/<username>/antigravity-config/main/install.ps1))) -Workspace "D:\workspaces"
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.ps1))) -Workspace "D:\workspaces"
 ```
 
 ---
@@ -43,7 +43,7 @@ If you have cloned this repository locally:
 
 ### Linux & macOS:
 ```bash
-git clone https://github.com/<username>/antigravity-config.git ~/antigravity-config
+git clone https://github.com/rizariaputrawira/antigravity-cli-config.git ~/antigravity-config
 cd ~/antigravity-config
 chmod +x install.sh
 ./install.sh
@@ -51,7 +51,7 @@ chmod +x install.sh
 
 ### Windows:
 ```powershell
-git clone https://github.com/<username>/antigravity-config.git $HOME\antigravity-config
+git clone https://github.com/rizariaputrawira/antigravity-cli-config.git $HOME\antigravity-config
 cd $HOME\antigravity-config
 .\install.ps1
 ```
@@ -112,8 +112,8 @@ When you push improvements or new custom skills to your GitHub repository, updat
 
 ```bash
 # On Linux / macOS
-curl -fsSL https://raw.githubusercontent.com/<username>/antigravity-config/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.sh | bash
 
 # On Windows
-irm https://raw.githubusercontent.com/<username>/antigravity-config/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.ps1 | iex
 ```

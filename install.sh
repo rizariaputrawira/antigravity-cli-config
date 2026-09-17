@@ -9,7 +9,7 @@
 set -euo pipefail
 
 # Configurable defaults
-DEFAULT_REPO="rizky-aria/antigravity-config"
+DEFAULT_REPO="rizariaputrawira/antigravity-cli-config"
 REPO_NAME="${ANTIGRAVITY_REPO:-$DEFAULT_REPO}"
 TARGET_WORKSPACE="${WORKSPACE_DIR:-${HOME}/workspaces}"
 DRY_RUN=false

@@ -10,7 +10,7 @@
 [CmdletBinding()]
 param (
     [string]$Workspace = "$HOME\workspaces",
-    [string]$Repo = "rizky-aria/antigravity-config",
+    [string]$Repo = "rizariaputrawira/antigravity-cli-config",
     [switch]$DryRun
 )
 

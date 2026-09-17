@@ -1,0 +1,37 @@
+# Antigravity CLI Sensitive Authentication & Device Identity
+*oauth-token*
+*oauth*
+installation_id
+.credentials*
+
+# Session history, multi-session state, SQLite databases
+history.jsonl
+*.db
+*.db-shm
+*.db-wal
+brain/
+conversations/
+presence/
+crashes/
+scratch/
+updater/
+cache/
+log/
+*.log
+last_check.timestamp
+jetbox_summaries*
+jetski_state*
+
+# Local Machine Overlays (untracked per device)
+*.local.json
+*.local
+.env
+.env.local
+
+# OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

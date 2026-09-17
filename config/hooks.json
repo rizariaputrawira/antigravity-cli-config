@@ -1,0 +1,48 @@
+{
+  "comment-checker": {
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"\nconst fs = require('fs');\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nconst result = { };\nprocess.stdout.write(JSON.stringify(result));\n\" 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "git-safety": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nconst cmd = (input.toolCall && input.toolCall.args && input.toolCall.args.CommandLine) || '';\nconst dangerous = ['git push --force', 'git reset --hard', 'rm -rf', 'git clean -fd', 'git push -f'];\nconst isDangerous = dangerous.some(d => cmd.includes(d));\nif (isDangerous) {\n  process.stdout.write(JSON.stringify({ decision: 'force_ask', reason: 'Potentially destructive git/rm command: ' + cmd }));\n} else {\n  process.stdout.write(JSON.stringify({ decision: 'allow' }));\n}\n\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "session-banner": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nif (input.invocationNum === 1) {\n  process.stdout.write(JSON.stringify({\n    injectSteps: [{ ephemeralMessage: '\u26a1 AGY | oma-mode active | ultrawork, hyperplan, security-research, tech-debt-audit, work-with-pr, ast-grep, github-triage skills available' }]\n  }));\n} else {\n  process.stdout.write(JSON.stringify({ injectSteps: [] }));\n}\n\"",
+        "timeout": 5
+      }
+    ]
+  },
+  "completion-enforcer": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nconst reason = input.terminationReason || '';\nif (reason === 'model_stop' && input.fullyIdle !== false) {\n  process.stdout.write(JSON.stringify({ decision: '' }));\n} else {\n  process.stdout.write(JSON.stringify({ decision: '' }));\n}\n\"",
+        "timeout": 5
+      }
+    ]
+  }
+}

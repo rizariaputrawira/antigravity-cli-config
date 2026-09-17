@@ -1,0 +1,9 @@
+{
+  "artifactReviewPolicy": "agent-decides",
+  "colorScheme": "dark",
+  "model": "Gemini 3.8 Flash (High)",
+  "runningLightSpeed": "fast",
+  "showFeedbackSurvey": false,
+  "toolPermission": "always-proceed",
+  "trustedWorkspaces": []
+}

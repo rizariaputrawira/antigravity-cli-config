@@ -20,19 +20,9 @@ Install on any clean machine in seconds without needing to clone the repository 
 curl -fsSL https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.sh | bash
 ```
 
-*With custom workspace directory:*
-```bash
-curl -fsSL https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.sh | bash -s -- --workspace=/path/to/workspaces
-```
-
 ### Windows (PowerShell)
 ```powershell
 irm https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.ps1 | iex
-```
-
-*With custom workspace directory:*
-```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/rizariaputrawira/antigravity-cli-config/main/install.ps1))) -Workspace "D:\workspaces"
 ```
 
 ---

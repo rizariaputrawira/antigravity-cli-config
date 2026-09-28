@@ -24,6 +24,7 @@ Loaded automatically for all conversations in this workspace.
 | `bash-scripting` | 'bash-scripting', 'bash', 'shell script', 'sh script', 'shellcheck' | POSIX vs Bash selection, quoting safety, traps, and shellcheck validation |
 | `linux-sysadmin` | 'linux-sysadmin', 'sysadmin', 'systemd', 'journalctl', 'selinux', 'firewall' | Host diagnostics, systemd services, rollback preparation, and security baseline safety |
 | `podman-operator` | 'podman-operator', 'podman', 'quadlet', 'rootless container' | Rootless Podman container lifecycle and systemd Quadlet service management |
+| `workflow-health-check` | '/workflow-health-check', 'workflow-health-check', 'wf-doctor', 'wf-repair' | Diagnose and auto-heal workspace workflow conventions and broken/outdated skills |
 
 ## WORKFLOW STORAGE & NAMING CONVENTIONS
 

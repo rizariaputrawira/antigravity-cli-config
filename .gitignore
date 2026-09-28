@@ -19,6 +19,7 @@ cache/
 log/
 *.log
 .impeccable/
+.workflow/executions/evidence/
 last_check.timestamp
 jetbox_summaries*
 jetski_state*

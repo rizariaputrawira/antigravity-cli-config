@@ -198,6 +198,13 @@ cp "${SRC_DIR}/config/hooks.json" "${CONFIG_DIR}/hooks.json"
 mkdir -p "${CONFIG_DIR}/skills"
 cp -r "${SRC_DIR}/config/skills/"* "${CONFIG_DIR}/skills/"
 
+# Copy utility scripts
+if [ -d "${SRC_DIR}/scripts" ]; then
+  mkdir -p "${CONFIG_DIR}/scripts"
+  cp -r "${SRC_DIR}/scripts/"* "${CONFIG_DIR}/scripts/"
+  chmod +x "${CONFIG_DIR}/scripts/"*.sh 2>/dev/null || true
+fi
+
 echo ""
 echo "============================================================"
 echo "🎉 Antigravity configuration successfully installed!"

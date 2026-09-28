@@ -170,6 +170,14 @@ $TargetSkillsDir = Join-Path $ConfigDir "skills"
 New-Item -ItemType Directory -Path $TargetSkillsDir -Force | Out-Null
 Copy-Item -Path (Join-Path $SrcDir "config\skills\*") -Destination $TargetSkillsDir -Recurse -Force
 
+# Copy utility scripts
+$SrcScriptsDir = Join-Path $SrcDir "scripts"
+if (Test-Path $SrcScriptsDir) {
+    $TargetScriptsDir = Join-Path $ConfigDir "scripts"
+    New-Item -ItemType Directory -Path $TargetScriptsDir -Force | Out-Null
+    Copy-Item -Path (Join-Path $SrcScriptsDir "*") -Destination $TargetScriptsDir -Recurse -Force
+}
+
 # Cleanup temp files if remote
 if ($TempDir -and (Test-Path $TempDir)) {
     Remove-Item -Path $TempDir -Recurse -Force -ErrorAction SilentlyContinue

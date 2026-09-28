@@ -4,7 +4,7 @@ A complete, battle-tested, portable configuration distribution for [Google Antig
 
 This repository packages:
 - 🧠 **Global Rules & Workflows**: The `oh-my-antigravity` framework, Ponytail minimization heuristics, atomic commits, and host safety protocols.
-- 🛠️ **28 Custom Skills**: Advanced planning suites (`orchestrate`, `hyperplan`, `superplan`, `flashplan`, `hyperexecution`, `brainstorm`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
+- 🛠️ **29 Custom Skills**: Advanced planning suites (`orchestrate`, `hyperplan`, `superplan`, `flashplan`, `hyperexecution`, `brainstorm`, `workflow-health-check`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
 - 🔌 **5 Built-in MCP Servers**: Pre-configured stdio integrations for `context7`, `github`, `filesystem`, `codegraph`, and `lsp`.
 - 🛡️ **Lifecycle Hooks**: Automated git command safety guards (`git-safety`) and session banner notifications.
 - ⚡ **Optimized Performance Settings**: Pre-configured execution policies (`always-proceed`), artifact review (`agent-decides`), and pinned model tier.
@@ -78,15 +78,31 @@ antigravity-config/
 ├── README.md                       # This documentation
 ├── install.sh                      # Zero-dependency dual-mode Linux/macOS installer
 ├── install.ps1                     # Native Windows PowerShell installer
+├── scripts/                        # Maintenance and utility scripts
+│   └── workflow-health-check.sh    # Workspace migration and skills auto-repair tool
 ├── config/                         # Portable global configurations (~/.gemini/config/)
 │   ├── AGENTS.md                   # Global agent rules (oh-my-antigravity)
 │   ├── config.json.template        # Base config with dynamic hostname injection
 │   ├── mcp_config.json.template    # Base MCP config with parameterized workspace path
 │   ├── hooks.json                  # Validated, syntax-fixed lifecycle hooks
 │   ├── hooks/                      # General lifecycle hook scripts
-│   └── skills/                     # All 28 custom skills (sanitized of hardcoded paths)
+│   └── skills/                     # All 29 custom skills (sanitized of hardcoded paths)
 └── settings/                       # App settings (~/.gemini/antigravity-cli/)
     └── settings.json.template      # Pinned models & permissions with empty trustedWorkspaces
+```
+
+---
+
+## 🩺 Workflow Health Check & Auto-Repair
+
+When switching devices, pulling updates, or working in projects created under legacy conventions (`.ar-wf/`, `.planning/`, deprecated `ar-*` skills), run `/workflow-health-check` or the automated CLI tool:
+
+```bash
+# Audit workspace and skills (read-only audit):
+./scripts/workflow-health-check.sh --check
+
+# Automatically heal and migrate to latest conventions:
+./scripts/workflow-health-check.sh --fix
 ```
 
 ---

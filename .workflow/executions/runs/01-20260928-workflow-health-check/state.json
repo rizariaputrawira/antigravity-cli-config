@@ -1,0 +1,15 @@
+{
+  "plan_id": "01-20260928-workflow-health-check",
+  "plan_path": ".workflow/plans/01-20260928-workflow-health-check.md",
+  "status": "completed",
+  "active_task": 4,
+  "retry_count": 0,
+  "tasks": [
+    { "id": 1, "title": "Build the automated workflow-health-check.sh engine", "status": "completed" },
+    { "id": 2, "title": "Create the workflow-health-check skill definition", "status": "completed" },
+    { "id": 3, "title": "Update config/AGENTS.md and README.md", "status": "completed" },
+    { "id": 4, "title": "End-to-end verification and regression testing", "status": "completed" }
+  ],
+  "created_at": "2026-09-28T17:30:00+07:00",
+  "updated_at": "2026-09-28T17:33:00+07:00"
+}

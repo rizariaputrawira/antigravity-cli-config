@@ -1,11 +1,11 @@
 ---
-name: ar-brainstorm
+name: brainstorm
 description: >-
   You MUST use this before any creative work — creating features, building components,
   adding functionality, or modifying behavior. Explores user intent, requirements, and
   design before implementation (including Wayfinder Fog/Frontier decision mapping for complex/murky domains),
-  and transitions seamlessly to ar-flashplan, ar-superplan, ar-hyperplan, and ar-hyperexecution.
-  Triggers: '/ar-brainstorm', 'ar-brainstorm', 'brainstorm', 'brainstorming', '/ar-brainstorming', 'ar-brainstorming', 'design spec', 'explore ideas', 'wayfinder', '/wayfinder', 'fog map'.
+  and transitions seamlessly to flashplan, superplan, hyperplan, and hyperexecution.
+  Triggers: '/brainstorm', 'brainstorm', 'brainstorming', 'design spec', 'explore ideas', 'wayfinder', '/wayfinder', 'fog map'.
 ---
 
 # Brainstorming Ideas Into Designs
@@ -48,14 +48,14 @@ override it:
   sentences to a few short paragraphs), and STOP.  
   *Transition on approval*:
   - If it is a simple localized edit (≤1–2 files) and your partner approves: proceed with normal development (TDD applies).
-  - If structured step-by-step tracking is desired (3–5 steps): launch `/ar-flashplan`.
-  - If scope creeps into 2–6 files: escalate to `/ar-superplan`.
+  - If structured step-by-step tracking is desired (3–5 steps): launch `/flashplan`.
+  - If scope creeps into 2–6 files: escalate to `/superplan`.
 - **Architectural** — new projects, new subsystems, changes that
   restructure how components fit together or alter interfaces others
   depend on. Follow the full process: questions, approaches, sectioned
-  design, written spec in `.ar-wf/planning/brainstorm/`, then transition to
-  `/ar-superplan` (medium architecture) or `/ar-hyperplan` (complex/adversarial architecture),
-  which feed directly into `/ar-hyperexecution` driven by `ar-ultrawork`.
+  design, written spec in `.workflow/brainstorm/`, then transition to
+  `/superplan` (medium architecture) or `/hyperplan` (complex/adversarial architecture),
+  which feed directly into `/hyperexecution` driven by `orchestrate`.
 
 When in doubt between two paths, take the heavier one. The ratchet is
 one-way: hidden complexity discovered mid-task upgrades the path —
@@ -90,8 +90,8 @@ your path and complete them in order.
 4. **Get approval** — STOP and wait for an explicit yes; presenting the design and starting in the same breath is skipping the gate
 5. **Transition to implementation or planning**:
    - For simple direct changes: implement via standard TDD workflow.
-    - For structured multi-step changes (3–5 steps): launch `/ar-flashplan`.
-    - If scope exceeds 2 files: escalate to `/ar-superplan`.
+   - For structured multi-step changes (3–5 steps): launch `/flashplan`.
+   - If scope exceeds 2 files: escalate to `/superplan`.
 
 **Architectural:**
 1. **Explore project context** — check files, docs, recent commits
@@ -99,24 +99,24 @@ your path and complete them in order.
 3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
-6. **Write design spec** — inspect `.ar-wf/planning/brainstorm/` to determine the next two-digit sequence `<SEQ>` (e.g. `01`, `02`). Save to `.ar-wf/planning/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md` (e.g. `.ar-wf/planning/brainstorm/01-20260911-auth-flow-design.md`) and commit
+6. **Write design spec** — inspect `.workflow/brainstorm/` to determine the next two-digit sequence `<SEQ>` (e.g. `01`, `02`). Save to `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md` (e.g. `.workflow/brainstorm/01-20260911-auth-flow-design.md`) and commit
 7. **Spec self-review** — quick inline check for placeholders, contradictions, ambiguity, scope
 8. **User reviews written spec** — ask user to review the spec file before proceeding
 9. **Transition to planning**:
-   - For medium systems (2–6 files, 5–10 steps): invoke `/ar-superplan` with the spec path.
-   - For large/complex/adversarial architectures: invoke `/ar-hyperplan` with the spec path.
-   - Plans persist to `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md` and execute via `/ar-hyperexecution` (driven by `ar-ultrawork`).
+   - For medium systems (2–6 files, 5–10 steps): invoke `/superplan` with the spec path.
+   - For large/complex/adversarial architectures: invoke `/hyperplan` with the spec path.
+   - Plans persist to `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md` and execute via `/hyperexecution` (driven by `orchestrate`).
 ---
 
 ## The Planning Triad Handoff
 
 After Brainstorming reaches approval, route into the appropriate planning tier:
 - **Bounded (Simple, 1-file)**: Direct standard TDD implementation.
-- **Bounded (3–5 steps, 1–2 files)**: [`/ar-flashplan`](../ar-flashplan/SKILL.md) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
-- **Medium Architectural (5–10 steps, 2–6 files)**: [`/ar-superplan`](../ar-superplan/SKILL.md) (2 subagents) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
-- **Large Architectural (10+ steps)**: [`/ar-hyperplan`](../ar-hyperplan/SKILL.md) (5 subagents) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
+- **Bounded (3–5 steps, 1–2 files)**: [`/flashplan`](../flashplan/SKILL.md) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
+- **Medium Architectural (5–10 steps, 2–6 files)**: [`/superplan`](../superplan/SKILL.md) (2 subagents) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
+- **Large Architectural (10+ steps)**: [`/hyperplan`](../hyperplan/SKILL.md) (5 subagents) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
 
-All plan files execute via **`/ar-hyperexecution`** driven by **`ar-ultrawork`** discipline.
+All plan files execute via **`/hyperexecution`** driven by **`orchestrate`** discipline.
 
 ---
 
@@ -155,7 +155,7 @@ When exploring complex architectural domains where multiple design decisions dep
   - **Frontier**: Precise questions that have **zero unresolved dependencies**.
 - *Invariant*: **Always ask questions strictly from the Frontier**, one at a time. Never ask a Blocked question prematurely.
 - As each Frontier question is settled, move it to Completed, unlock any newly unblocked questions into the Frontier, and record the factual rationale in the design spec (`## Settled Decisions & Answers`).
-- If invoked directly via `/wayfinder`, produce or maintain a Wayfinder Map (`MAP.md` sections: Frontier, Blocked, Fog, Settled) in chat or persist to `.ar-wf/planning/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-wayfinder.md` to map the terrain before drafting code.
+- If invoked directly via `/wayfinder`, produce or maintain a Wayfinder Map (`MAP.md` sections: Frontier, Blocked, Fog, Settled) in chat or persist to `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-wayfinder.md` to map the terrain before drafting code.
 
 **Exploring approaches:**
 
@@ -191,9 +191,9 @@ When exploring complex architectural domains where multiple design decisions dep
 
 **Documentation:**
 
-- Ensure directory exists: `mkdir -p .ar-wf/planning/brainstorm`
-- Determine sequential identifier `<SEQ>`: Inspect `.ar-wf/planning/brainstorm/` for existing files matching `[0-9]{2}-*`, find the highest two-digit sequence, and increment by 1 (default `01` if empty or none).
-- Write the validated design (spec) to `.ar-wf/planning/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md` (e.g., `.ar-wf/planning/brainstorm/01-20260911-auth-service-design.md`), including architecture, components, and the Settled Decisions & Answers ledger.
+- Ensure directory exists: `mkdir -p .workflow/brainstorm`
+- Determine sequential identifier `<SEQ>`: Inspect `.workflow/brainstorm/` for existing files matching `[0-9]{2}-*`, find the highest two-digit sequence, and increment by 1 (default `01` if empty or none).
+- Write the validated design (spec) to `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md` (e.g., `.workflow/brainstorm/01-20260911-auth-service-design.md`), including architecture, components, and the Settled Decisions & Answers ledger.
 - Filename must be strictly lowercase kebab-case.
 - Commit the design document to git.
 
@@ -210,14 +210,14 @@ Fix any issues inline.
 **User Review Gate:**
 After the spec review passes, ask the user to review the written spec:
 
-> "Spec written to `.ar-wf/planning/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md`. Please review it and let me know if you'd like any changes before we generate the implementation plan."
+> "Spec written to `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md`. Please review it and let me know if you'd like any changes before we generate the implementation plan."
 
 Wait for the user's response. Proceed only once approved.
 
 **Transition to Implementation Planning:**
 
-- Invoke `/ar-superplan` (for medium architectures, 2–6 files) or `/ar-hyperplan` (for large/adversarial planning) passing the spec path.
-- The resulting `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md` checklist can then be executed relentlessly with `/ar-hyperexecution`.
+- Invoke `/superplan` (for medium architectures, 2–6 files) or `/hyperplan` (for large/adversarial planning) passing the spec path.
+- The resulting `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md` checklist can then be executed relentlessly with `/hyperexecution`.
 
 ---
 

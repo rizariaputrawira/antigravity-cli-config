@@ -4,9 +4,9 @@ A complete, battle-tested, portable configuration distribution for [Google Antig
 
 This repository packages:
 - 🧠 **Global Rules & Workflows**: The `oh-my-antigravity` framework, Ponytail minimization heuristics, atomic commits, and host safety protocols.
-- 🛠️ **29 Custom Skills**: Advanced planning suites (`ar-ultrawork`, `ar-hyperplan`, `ar-superplan`, `ar-flashplan`, `ar-hyperexecution`, `ar-brainstorm`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
+- 🛠️ **28 Custom Skills**: Advanced planning suites (`orchestrate`, `hyperplan`, `superplan`, `flashplan`, `hyperexecution`, `brainstorm`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
 - 🔌 **5 Built-in MCP Servers**: Pre-configured stdio integrations for `context7`, `github`, `filesystem`, `codegraph`, and `lsp`.
-- 🛡️ **Lifecycle Hooks**: Automated git command safety guards (`git-safety`), comment hygiene, and session banner notifications.
+- 🛡️ **Lifecycle Hooks**: Automated git command safety guards (`git-safety`) and session banner notifications.
 - ⚡ **Optimized Performance Settings**: Pre-configured execution policies (`always-proceed`), artifact review (`agent-decides`), and pinned model tier.
 
 ---
@@ -84,14 +84,9 @@ antigravity-config/
 │   ├── mcp_config.json.template    # Base MCP config with parameterized workspace path
 │   ├── hooks.json                  # Validated, syntax-fixed lifecycle hooks
 │   ├── hooks/                      # General lifecycle hook scripts
-│   └── skills/                     # All 29 custom skills (sanitized of hardcoded paths)
-├── settings/                       # App settings (~/.gemini/antigravity-cli/)
-│   └── settings.json.template      # Pinned models & permissions with empty trustedWorkspaces
-├── integrations/                   # Optional third-party integrations
-│   └── herdr/
-│       └── herdr-agent-state.sh
-└── templates/
-    └── workspace-agents/           # Starter .agents/ template for new projects
+│   └── skills/                     # All 28 custom skills (sanitized of hardcoded paths)
+└── settings/                       # App settings (~/.gemini/antigravity-cli/)
+    └── settings.json.template      # Pinned models & permissions with empty trustedWorkspaces
 ```
 
 ---

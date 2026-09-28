@@ -1,5 +1,4 @@
 {
-  "plugins": {},
   "userSettings": {
     "remoteControlHostname": "${REMOTE_HOSTNAME}"
   }

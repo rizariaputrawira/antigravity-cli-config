@@ -4,7 +4,7 @@ Use this template when dispatching a spec document reviewer subagent.
 
 **Purpose:** Verify the spec is complete, consistent, and ready for implementation planning.
 
-**Dispatch after:** Spec document is written to .ar-wf/planning/brainstorm/
+**Dispatch after:** Spec document is written to .workflow/brainstorm/
 
 ```
 Subagent (general-purpose):

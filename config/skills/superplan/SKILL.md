@@ -1,46 +1,46 @@
 ---
-name: ar-superplan
+name: superplan
 description: >-
-  Pragmatic 2-agent planning skill for medium-complexity tasks. Covers all 5 dimensions of hyperplan (Research, Architecture, Challenger, Skeptic, Validation) through a lean 'Builder vs Red Team' structure: Agent 1 (Builder: Research + Architecture + Challenger) drafts the grounded solution, while Agent 2 (Red Team: Skeptic + Validator) cuts bloat and stress-tests edge cases. Asks user if scope exceeds ceiling before proceeding. Persists atomic, verified plans directly to .ar-wf/planning/. Triggers: '/ar-superplan', 'ar-superplan', '/superplan', 'superplan', 'spp', 'quick plan', 'medium plan', 'pragmatic plan'.
+  Pragmatic 2-agent planning skill for medium-complexity tasks. Covers all 5 dimensions of hyperplan (Research, Architecture, Challenger, Skeptic, Validation) through a lean 'Builder vs Red Team' structure: Agent 1 (Builder: Research + Architecture + Challenger) drafts the grounded solution, while Agent 2 (Red Team: Skeptic + Validator) cuts bloat and stress-tests edge cases. Asks user if scope exceeds ceiling before proceeding. Persists atomic, verified plans directly to .workflow/plans/. Triggers: '/superplan', 'superplan', 'spp', 'quick plan', 'medium plan', 'pragmatic plan'.
 ---
 
-# AR-SUPERPLAN — Fast 2-Agent Planning for Medium Tasks
+# SUPERPLAN — Fast 2-Agent Planning for Medium Tasks
 
-> **MANDATORY**: First action when this skill loads — say "⚡ AR-SUPERPLAN MODE ENABLED!" so the user knows lean planning started.
+> **MANDATORY**: First action when this skill loads — say "⚡ SUPERPLAN MODE ENABLED!" so the user knows lean planning started.
 
 <HARD-GATE>
 PLANNING ONLY — DO NOT IMPLEMENT.
 This is strictly a planning skill. Under NO circumstances should you:
 1. Write, edit, or modify any project code or source files.
-2. Scaffold execution directories or state (`.ar-wf/hyper-execution/`).
-3. Automatically start executing Step 1 or trigger `ar-hyperexecution`.
+2. Scaffold execution directories or state (`.workflow/executions/`).
+3. Automatically start executing Step 1 or trigger `hyperexecution`.
 
 Your task ends completely when:
-1. The plan is saved to `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g. `.ar-wf/planning/01-20260911-user-profile-endpoint.md`).
+1. The plan is saved to `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g. `.workflow/plans/01-20260911-user-profile-endpoint.md`).
 2. The results are presented to the user.
 
-STOP IMMEDIATELY after outputting results. Wait for the user to review the plan and explicitly command you to execute it (e.g. via `/ar-hyperexecution .ar-wf/planning/01-20260911-...`).
+STOP IMMEDIATELY after outputting results. Wait for the user to review the plan and explicitly command you to execute it (e.g. via `/hyperexecution .workflow/plans/01-20260911-...`).
 </HARD-GATE>
 
 ## WHAT THIS IS
 
-Where `ar-hyperplan` unleashes a 5-member hostile debate war room (5 subagents total) for massive, high-risk initiatives, **`ar-superplan`** is the high-velocity counterpart for **medium-complexity and everyday tasks**.
+Where `hyperplan` unleashes a 5-member hostile debate war room (5 subagents total) for massive, high-risk initiatives, **`superplan`** is the high-velocity counterpart for **medium-complexity and everyday tasks**.
 
-It covers the exact same **5 core dimensions** of `ar-hyperplan`, but condenses them into a high-efficiency **2-Agent "Builder vs Red Team"** workflow:
+It covers the exact same **5 core dimensions** of `hyperplan`, but condenses them into a high-efficiency **2-Agent "Builder vs Red Team"** workflow:
 - **Agent 1: The Builder** (`researcher` + `architect` + `challenger`) &rarr; Researches the codebase, designs clean architecture, and explores the simplest viable pattern.
 - **Agent 2: The Red Team** (`skeptic` + `validator`) &rarr; Ruthlessly cuts bloat (YAGNI), exposes edge cases, and defines concrete verification commands.
 
-The orchestrator synthesizes both passes into an atomic, dependency-ordered plan saved to `.ar-wf/planning/`, immediately ready for execution by `ar-hyperexecution`.
+The orchestrator synthesizes both passes into an atomic, dependency-ordered plan saved to `.workflow/plans/`, immediately ready for execution by `hyperexecution`.
 
 ---
 
 ## SCOPE GUARDRAILS (INTERACTIVE ESCALATION)
 
-`ar-superplan` is calibrated for **medium tasks** (typically 2–6 files, 5–10 atomic steps). It enforces strict boundaries in both directions:
+`superplan` is calibrated for **medium tasks** (typically 2–6 files, 5–10 atomic steps). It enforces strict boundaries in both directions:
 
-1. **Floor Guardrail (Too Small &rarr; Recommends `/ar-flashplan`)**:
+1. **Floor Guardrail (Too Small &rarr; Recommends `/flashplan`)**:
    - If the task only touches 1–2 files and requires ≤3 trivial steps, inform the user:
-     *"💡 Note: This task is small enough for `/ar-flashplan` (runs inline with 0 subagents in ~3s)."*
+     *"💡 Note: This task is small enough for `/flashplan` (runs inline with 0 subagents in ~3s)."*
      (Proceeds normally).
 
 2. **Ceiling Guardrail (Too Big / High Blast Radius &rarr; Interactive Upgrade Prompt)**:
@@ -48,10 +48,10 @@ The orchestrator synthesizes both passes into an atomic, dependency-ordered plan
    - **PAUSE and ASK THE USER** via `ask_question`:
      - **Question**: `"This task has high blast radius / requires >10 steps, which exceeds superplan's medium scope. How would you like to proceed?"`
      - **Options**:
-       1. `"(Recommended) Upgrade to /ar-hyperplan — Launch the 5-member hostile debate gauntlet for full architectural rigor."`
-       2. `"Continue with ar-superplan anyway — Proceed with the 2-agent Builder vs Red Team plan."`
+       1. `"(Recommended) Upgrade to /hyperplan — Launch the 5-member hostile debate gauntlet for full architectural rigor."`
+       2. `"Continue with superplan anyway — Proceed with the 2-agent Builder vs Red Team plan."`
    - **Follow User Decision**:
-     - If user chooses `/ar-hyperplan`: abort superplan and trigger `/ar-hyperplan`.
+     - If user chooses `/hyperplan`: abort superplan and trigger `/hyperplan`.
      - If user chooses to continue: synthesize and persist the superplan as requested.
 
 ---
@@ -122,13 +122,13 @@ Your responsibilities:
 
 2. VALIDATOR (Edge Cases & Verification Proof):
    - Expose understated caller blast radius: run local MCP `call_mcp_tool(ServerName="lsp", ToolName="lsp_references", Arguments={"file": "<file>", "line": <line_0idx>, "character": <char>})` (0-indexed) on any modified signatures to verify all downstream callers are accounted for (fall back to `grep_search` if uninitialized).
-   - Flag breaking changes impacting >10 callers across module boundaries for `/ar-hyperplan` escalation.
+   - Flag breaking changes impacting >10 callers across module boundaries for `/hyperplan` escalation.
    - Identify missed boundary conditions, empty/null states, and error handling gaps.
    - What happens on unexpected input or network/storage failure?
    - Define the EXACT verification command (test command, curl, CLI run) that proves each step works.
 
 3. SCOPE GUARDRAIL CHECK:
-   - If this plan exceeds 10–12 steps or has high architectural blast radius, explicitly output: "⚠️ SCOPE WARNING: Recommend upgrading to /ar-hyperplan."
+   - If this plan exceeds 10–12 steps or has high architectural blast radius, explicitly output: "⚠️ SCOPE WARNING: Recommend upgrading to /hyperplan."
 
 Output:
 - Scope Cuts & Deletions (what to remove from Builder's plan)
@@ -143,8 +143,8 @@ Output:
 
 1. **Check Scope Guardrail**:
    - If the Red Team reported that the plan exceeded medium scope (>10–12 steps or high architectural risk):
-   - **Ask the user** via `ask_question` whether to upgrade to `/ar-hyperplan` or continue with `ar-superplan`.
-   - If user chooses to upgrade, exit and launch `/ar-hyperplan`.
+   - **Ask the user** via `ask_question` whether to upgrade to `/hyperplan` or continue with `superplan`.
+   - If user chooses to upgrade, exit and launch `/hyperplan`.
 2. **Synthesize Plan**:
    - **Apply Skeptic cuts**: Remove any rejected files, classes, or boilerplate.
    - **Apply Validator safeguards**: Add defensive guards for identified edge cases.
@@ -154,17 +154,17 @@ Output:
 
 ## PHASE 4: PERSISTENCE
 
-Save the finalized plan directly to the project's `.ar-wf/planning/` folder:
-1. Inspect `.ar-wf/planning/` to determine the next sequential two-digit integer prefix `<SEQ>` (e.g., `01`, `02`, ..., `12`).
+Save the finalized plan directly to the project's `.workflow/plans/` folder:
+1. Inspect `.workflow/plans/` to determine the next sequential two-digit integer prefix `<SEQ>` (e.g., `01`, `02`, ..., `12`).
 2. Current date in `YYYYMMDD` format (e.g. `20260911`).
 3. Descriptive kebab-case slug for the plan title.
-4. Save the file as: `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g., `.ar-wf/planning/01-20260911-user-auth-endpoint.md`).
+4. Save the file as: `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g., `.workflow/plans/01-20260911-user-auth-endpoint.md`).
 5. Format each step with checkboxes `[ ]`, actions, touched files, and verification commands.
 
-The plan is now saved. Do NOT execute it automatically. Wait for the user to invoke [`/ar-hyperexecution`](../ar-hyperexecution/SKILL.md).
+The plan is now saved. Do NOT execute it automatically. Wait for the user to invoke [`/hyperexecution`](../hyperexecution/SKILL.md).
 
 ---
 
 ## OUTPUT FORMAT
 
-Present results concisely: (1) Scope & Guardrail Status, (2) Codebase Grounding & Architecture (Builder), (3) Red Team Review (Skeptic cuts & Validator guards), (4) Executable Plan (5–10 atomic steps formatted with `- [ ] **Step N: [Short Title]**`, action, target files, and verification command), and (5) Persisted Plan File path (`.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`, ready for `/ar-hyperexecution`).
+Present results concisely: (1) Scope & Guardrail Status, (2) Codebase Grounding & Architecture (Builder), (3) Red Team Review (Skeptic cuts & Validator guards), (4) Executable Plan (5–10 atomic steps formatted with `- [ ] **Step N: [Short Title]**`, action, target files, and verification command), and (5) Persisted Plan File path (`.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`, ready for `/hyperexecution`).

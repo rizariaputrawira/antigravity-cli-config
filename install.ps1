@@ -94,8 +94,9 @@ if ($DryRun) {
         Write-Host "🔎 [DRY RUN] Would backup existing configuration to $HOME\.gemini.bak.<timestamp>" -ForegroundColor Yellow
     }
     
+    $DetectedHostname = if ($env:COMPUTERNAME) { $env:COMPUTERNAME } elseif ($env:HOSTNAME) { $env:HOSTNAME } else { "localhost" }
     Write-Host "🔎 [DRY RUN] Would render templates:" -ForegroundColor Yellow
-    Write-Host "   - config.json.template -> $ConfigDir\config.json (hostname: $env:COMPUTERNAME)"
+    Write-Host "   - config.json.template -> $ConfigDir\config.json (hostname: $DetectedHostname)"
     Write-Host "   - mcp_config.json.template -> $ConfigDir\mcp_config.json (workspace: $NormalizedWorkspace)"
     Write-Host "   - settings.json.template -> $CliDir\settings.json (if missing)"
     Write-Host "🔎 [DRY RUN] Would copy skills, hooks, and AGENTS.md." -ForegroundColor Yellow
@@ -136,7 +137,8 @@ Write-Host "⚙️ Rendering configuration templates..." -ForegroundColor Cyan
 # Render config.json
 $ConfigTemplatePath = Join-Path $SrcDir "config\config.json.template"
 $ConfigJsonContent = Get-Content -Raw -Path $ConfigTemplatePath
-$ConfigJsonContent = $ConfigJsonContent.Replace('${REMOTE_HOSTNAME}', $env:COMPUTERNAME)
+$DetectedHostname = if ($env:COMPUTERNAME) { $env:COMPUTERNAME } elseif ($env:HOSTNAME) { $env:HOSTNAME } else { "localhost" }
+$ConfigJsonContent = $ConfigJsonContent.Replace('${REMOTE_HOSTNAME}', $DetectedHostname)
 Set-Content -Path (Join-Path $ConfigDir "config.json") -Value $ConfigJsonContent -Encoding utf8
 
 # Render mcp_config.json
@@ -165,7 +167,8 @@ Copy-Item -Path (Join-Path $SrcDir "config\hooks.json") -Destination (Join-Path 
 
 # Copy skills
 $TargetSkillsDir = Join-Path $ConfigDir "skills"
-Copy-Item -Path (Join-Path $SrcDir "config\skills") -Destination $ConfigDir -Recurse -Force
+New-Item -ItemType Directory -Path $TargetSkillsDir -Force | Out-Null
+Copy-Item -Path (Join-Path $SrcDir "config\skills\*") -Destination $TargetSkillsDir -Recurse -Force
 
 # Cleanup temp files if remote
 if ($TempDir -and (Test-Path $TempDir)) {

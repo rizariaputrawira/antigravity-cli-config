@@ -77,9 +77,17 @@ async function waitFor<T>(
     await new Promise(r => setTimeout(r, 10)); // Poll every 10ms
   }
 }
-```
 
-See `condition-based-waiting-example.ts` in this directory for complete implementation with domain-specific helpers (`waitForEvent`, `waitForEventCount`, `waitForEventMatch`) from actual debugging session.
+// Domain helper: Wait for an item in a list matching a predicate
+async function waitForItem<T>(
+  getItems: () => T[],
+  predicate: (item: T) => boolean,
+  description: string,
+  timeoutMs = 5000
+): Promise<T> {
+  return waitFor(() => getItems().find(predicate), description, timeoutMs);
+}
+```
 
 ## Common Mistakes
 

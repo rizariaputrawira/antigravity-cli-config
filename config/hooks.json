@@ -1,18 +1,4 @@
 {
-  "comment-checker": {
-    "PostToolUse": [
-      {
-        "matcher": "write_to_file|replace_file_content|multi_replace_file_content",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"\nconst fs = require('fs');\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nconst result = { };\nprocess.stdout.write(JSON.stringify(result));\n\" 2>/dev/null || true",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  },
   "git-safety": {
     "PreToolUse": [
       {
@@ -31,16 +17,7 @@
     "PreInvocation": [
       {
         "type": "command",
-        "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nif (input.invocationNum === 1) {\n  process.stdout.write(JSON.stringify({\n    injectSteps: [{ ephemeralMessage: '\u26a1 AGY | oma-mode active | ultrawork, hyperplan, security-research, tech-debt-audit, work-with-pr, ast-grep, github-triage skills available' }]\n  }));\n} else {\n  process.stdout.write(JSON.stringify({ injectSteps: [] }));\n}\n\"",
-        "timeout": 5
-      }
-    ]
-  },
-  "completion-enforcer": {
-    "Stop": [
-      {
-        "type": "command",
-        "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nconst reason = input.terminationReason || '';\nif (reason === 'model_stop' && input.fullyIdle !== false) {\n  process.stdout.write(JSON.stringify({ decision: '' }));\n} else {\n  process.stdout.write(JSON.stringify({ decision: '' }));\n}\n\"",
+        "command": "node -e \"\nconst input = JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8'));\nif (input.invocationNum === 1) {\n  process.stdout.write(JSON.stringify({\n    injectSteps: [{ ephemeralMessage: '\u26a1 AGY | oma-mode active | orchestrate, hyperplan, security-research, tech-debt-audit, work-with-pr, ast-grep, github-triage skills available' }]\n  }));\n} else {\n  process.stdout.write(JSON.stringify({ injectSteps: [] }));\n}\n\"",
         "timeout": 5
       }
     ]

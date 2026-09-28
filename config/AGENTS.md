@@ -7,12 +7,12 @@ Loaded automatically for all conversations in this workspace.
 
 | Skill | Trigger | Purpose |
 |---|---|---|
-| `ar-ultrawork` | 'ar-ultrawork', '/ar-ultrawork', 'ultrawork', 'ulw', 'finish completely' | Maximum-effort autonomous conductor ('God Mode') |
-| `ar-hyperplan` | 'ar-hyperplan', '/ar-hyperplan', 'hyperplan', 'hpp', 'adversarial plan' | 5-member adversarial planning team |
-| `ar-superplan` | 'ar-superplan', '/ar-superplan', 'superplan', 'spp', 'quick plan' | Fast 2-agent planning (Builder vs Red Team) for medium tasks |
-| `ar-flashplan` | 'ar-flashplan', '/ar-flashplan', 'flashplan', 'flp', 'fast plan' | Fast surgical inline planning (0 subagents) for small tasks |
-| `ar-hyperexecution` | 'ar-hyperexecution', '/ar-hyperexecution', 'hyperexecution', 'start work', 'resume work', 'execute plan' | Disk-persisted state tracking for multi-session execution (.ar-wf/) |
-| `ar-brainstorm` | 'ar-brainstorm', '/ar-brainstorm', 'brainstorm', 'design spec', 'explore ideas', 'wayfinder', 'fog map' | Explore user intent, requirements, and design before implementation (including Wayfinder decision mapping) |
+| `orchestrate` | '/orchestrate', 'orchestrate', 'orc', 'finish completely' | Maximum-effort autonomous conductor ('God Mode') |
+| `hyperplan` | '/hyperplan', 'hyperplan', 'hpp', 'adversarial plan' | 5-member adversarial planning team |
+| `superplan` | '/superplan', 'superplan', 'spp', 'quick plan' | Fast 2-agent planning (Builder vs Red Team) for medium tasks |
+| `flashplan` | '/flashplan', 'flashplan', 'flp', 'fast plan' | Fast surgical inline planning (0 subagents) for small tasks |
+| `hyperexecution` | '/hyperexecution', 'hyperexecution', 'start work', 'resume work', 'execute plan' | Disk-persisted state tracking for multi-session execution (.workflow/) |
+| `brainstorm` | '/brainstorm', 'brainstorm', 'design spec', 'explore ideas', 'wayfinder', 'fog map' | Explore user intent, requirements, and design before implementation (including Wayfinder decision mapping) |
 | `work-with-pr` | 'create a PR', 'implement and PR' | Full PR lifecycle with worktrees |
 | `tech-debt-audit` | 'tech debt', 'code health' | 9-dimension tech debt audit |
 | `security-research` | 'security review', 'vulnerability audit' | Parallel security audit team |
@@ -27,12 +27,12 @@ Loaded automatically for all conversations in this workspace.
 
 ## WORKFLOW STORAGE & NAMING CONVENTIONS
 
-All workflow artifacts are persisted under `.ar-wf/`:
-- **Plans**: `.ar-wf/planning/<SEQ>-YYYYMMDD-<tier>-<kebab-case>.md` (e.g. `01-20260911-flash-add-flag.md`)
-- **Brainstorm Specs**: `.ar-wf/planning/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md`
-- **Execution FSM & Notes**: `.ar-wf/hyper-execution/executions/<plan-id>/state.json`, `notes.md`
-- **Verification Evidence**: `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt`
-- **Audit Ledger**: `.ar-wf/hyper-execution/ledger.jsonl`
+All workflow artifacts are persisted under `.workflow/`:
+- **Plans**: `.workflow/plans/<SEQ>-YYYYMMDD-<tier>-<kebab-case>.md` (e.g. `01-20260911-flash-add-flag.md`)
+- **Brainstorm Specs**: `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md`
+- **Execution FSM & Notes**: `.workflow/executions/runs/<plan-id>/state.json`, `notes.md`
+- **Verification Evidence**: `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`
+- **Audit Ledger**: `.workflow/executions/ledger.jsonl`
 
 ## CORE OPERATING PRINCIPLES
 
@@ -72,17 +72,17 @@ Before implementing anything non-trivial:
 ### Standard Mode (default)
 Respond thoughtfully. Ask one clarifying question if the task is ambiguous. Implement with evidence-bound QA.
 
-### Ultrawork Mode (`ar-ultrawork` or `ulw`)
-Activate the ar-ultrawork skill. Decompose → Execute → Gate check → Report. Do not stop until all criteria are proven.
+### Orchestrate Mode (`orchestrate` or `orc`)
+Activate the orchestrate skill. Decompose → Execute → Gate check → Report. Do not stop until all criteria are proven.
 
-### Hyperplan Mode (`ar-hyperplan` or `hpp`)
-Activate the ar-hyperplan skill. Spawn 5 adversarial subagents → synthesize defensible insights → formalize executable plan in .ar-wf/planning/. PLAN-ONLY: never execute code automatically; stop and wait for user.
+### Hyperplan Mode (`hyperplan` or `hpp`)
+Activate the hyperplan skill. Spawn 5 adversarial subagents → synthesize defensible insights → formalize executable plan in .workflow/plans/. PLAN-ONLY: never execute code automatically; stop and wait for user.
 
-### Superplan Mode (`/ar-superplan` or `spp`)
-Activate the ar-superplan skill. 2-agent review (Builder vs Red Team) covering all 5 dimensions for medium tasks → synthesize lean plan persisted to .ar-wf/planning/. PLAN-ONLY: never execute code automatically; stop and wait for user.
+### Superplan Mode (`/superplan` or `spp`)
+Activate the superplan skill. 2-agent review (Builder vs Red Team) covering all 5 dimensions for medium tasks → synthesize lean plan persisted to .workflow/plans/. PLAN-ONLY: never execute code automatically; stop and wait for user.
 
-### Flashplan Mode (`/ar-flashplan` or `flp`)
-Activate the ar-flashplan skill. Instant code-grounded surgical planning (0 subagents, max 3-5 steps) persisted to .ar-wf/planning/. PLAN-ONLY: never execute code automatically; stop and wait for user.
+### Flashplan Mode (`/flashplan` or `flp`)
+Activate the flashplan skill. Instant code-grounded surgical planning (0 subagents, max 3-5 steps) persisted to .workflow/plans/. PLAN-ONLY: never execute code automatically; stop and wait for user.
 
 ### Team Mode (complex tasks)
 For tasks that naturally decompose into parallel work streams, spawn specialized subagents:

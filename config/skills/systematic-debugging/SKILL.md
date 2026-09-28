@@ -266,10 +266,10 @@ If you catch yourself thinking:
 ## Planning & Execution Handoff
 
 Once the root cause is confirmed and minimal hypothesis proven:
-- **Single-Component Bug (1–2 files)**: Fix directly via TDD or launch [`/ar-flashplan`](../ar-flashplan/SKILL.md) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`.
-- **Multi-Component Defect (2–6 files, state propagation, race condition)**: Launch [`/ar-superplan`](../ar-superplan/SKILL.md) (Builder vs Red Team).
-- **Architectural Failure (Phase 4.5: 3+ fixes failed, fundamental pattern broken)**: Halt immediately. Launch [`/ar-brainstorm`](../ar-brainstorm/SKILL.md) or [`/ar-hyperplan`](../ar-hyperplan/SKILL.md) to restructure.
-- **Evidence Standard**: Execute remediation under [`/ar-hyperexecution`](../ar-hyperexecution/SKILL.md) and save reproduction & green test proof to `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt`.
+- **Single-Component Bug (1–2 files)**: Fix directly via TDD or launch [`/flashplan`](../flashplan/SKILL.md) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`.
+- **Multi-Component Defect (2–6 files, state propagation, race condition)**: Launch [`/superplan`](../superplan/SKILL.md) (Builder vs Red Team).
+- **Architectural Failure (Phase 4.5: 3+ fixes failed, fundamental pattern broken)**: Halt immediately. Launch [`/brainstorm`](../brainstorm/SKILL.md) or [`/hyperplan`](../hyperplan/SKILL.md) to restructure.
+- **Evidence Standard**: Execute remediation under [`/hyperexecution`](../hyperexecution/SKILL.md) and save reproduction & green test proof to `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`.
 
 ## When Process Reveals "No Root Cause"
 

@@ -70,13 +70,13 @@ For each finding, confirm it's truly unused:
 
 ## Phase 3: Remove (batched with verification)
 
-For large dead code removals (>2 files or multi-category), formalize into an execution plan via [`/ar-superplan`](../ar-superplan/SKILL.md) executed by [`/ar-hyperexecution`](../ar-hyperexecution/SKILL.md).
+For large dead code removals (>2 files or multi-category), formalize into an execution plan via [`/superplan`](../superplan/SKILL.md) executed by [`/hyperexecution`](../hyperexecution/SKILL.md).
 
 For each batch:
 1. Remove the code
 2. `npx tsc --noEmit` (or typecheck) — must pass
 3. Run test suite — must pass
-4. Capture verification output into `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt` (or local evidence)
+4. Capture verification output into `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt` (or local evidence)
 5. `git commit -m "chore(deadcode): remove unused [category]"`
 
 If anything breaks, revert the batch and investigate.

@@ -97,9 +97,9 @@ Skip any step = lying, not verifying
 ❌ "Tests pass, phase complete"
 ```
 
-**Physical Proof Capture (.ar-wf/hyper-execution/evidence/):**
+**Physical Proof Capture (.workflow/executions/evidence/):**
 ```
-✅ Save raw command output to `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt` → verify exit 0
+✅ Save raw command output to `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt` → verify exit 0
 ❌ "Output looks fine in the terminal" without capturing persistent evidence
 ```
 

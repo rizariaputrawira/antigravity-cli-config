@@ -1,30 +1,30 @@
 ---
-name: ar-hyperplan
+name: hyperplan
 description: >-
   Adversarial multi-agent planning skill (PLAN-ONLY, never auto-executes). Orchestrates 5
   hostile subagents (skeptic, validator, researcher, architect, challenger) via parallel
   subagent invocation for ruthless cross-critique debate, distills only defensible insights,
-  then formalizes an executable plan into .ar-wf/planning/. Strictly halts after plan generation;
-  does NOT implement code. Triggers: '/ar-hyperplan', 'ar-hyperplan', 'hyperplan', 'hpp', 'adversarial plan', 'hostile planning',
+  then formalizes an executable plan into .workflow/plans/. Strictly halts after plan generation;
+  does NOT implement code. Triggers: '/hyperplan', 'hyperplan', 'hpp', 'adversarial plan', 'hostile planning',
   'cross-critique plan', 'maximum rigor plan'.
 ---
 
-# AR-HYPERPLAN — Adversarial Multi-Agent Planning
+# HYPERPLAN — Adversarial Multi-Agent Planning
 
-> **MANDATORY**: First action when this skill loads — say "🔥 AR-HYPERPLAN MODE ENABLED!" so the user knows orchestration started.
+> **MANDATORY**: First action when this skill loads — say "🔥 HYPERPLAN MODE ENABLED!" so the user knows orchestration started.
 
 <HARD-GATE>
 PLANNING ONLY — DO NOT IMPLEMENT.
 This is strictly a planning skill. Under NO circumstances should you:
 1. Write, edit, or modify any project code or source files.
-2. Scaffold execution directories or state (`.ar-wf/hyper-execution/`).
-3. Automatically start executing Step 1 or trigger `ar-hyperexecution`.
+2. Scaffold execution directories or state (`.workflow/executions/`).
+3. Automatically start executing Step 1 or trigger `hyperexecution`.
 
 Your task ends completely when:
-1. The plan is saved to `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g. `.ar-wf/planning/01-20260911-storage-engine-refactor.md`).
+1. The plan is saved to `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g. `.workflow/plans/01-20260911-storage-engine-refactor.md`).
 2. The results are presented to the user.
 
-STOP IMMEDIATELY after presenting the plan. Wait for the user to review the plan and explicitly command you to execute it (e.g. via `/ar-hyperexecution .ar-wf/planning/01-20260911-...`).
+STOP IMMEDIATELY after presenting the plan. Wait for the user to review the plan and explicitly command you to execute it (e.g. via `/hyperexecution .workflow/plans/01-20260911-...`).
 </HARD-GATE>
 
 ## WHAT THIS IS
@@ -111,7 +111,7 @@ Your tools & weapons:
 - Weapons: "This violates separation of concerns.", "This creates a circular dependency.", "This will not scale past N because...", "The correct pattern here is X, not Y."
 - Inspect component boundaries and hierarchy using local MCP `call_mcp_tool(ServerName="codegraph", ToolName="codegraph_explore", Arguments={"query": "<query>", "projectPath": "<dir>"})` and local LSP `lsp_workspace_symbols` / `lsp_document_symbols`. Fall back to `ast-grep` / `grep_search` if unindexed or uninitialized.
 - Inspect polymorphic hierarchies: for typed languages, use `call_mcp_tool(ServerName="lsp", ToolName="lsp_implementation", Arguments={"file": "<file>", "line": <line_0idx>, "character": <char>})` (0-indexed coordinates).
-- Inspect directory layouts: use bounded `call_mcp_tool(ServerName="filesystem", ToolName="directory_tree", Arguments={"path": "<subpath>", "excludePatterns": [".git", "node_modules", "dist", "build", ".hyper-execution", ".ar-wf", ".codegraph", "target", "vendor"]})`. Target specific subdirectories only, never the repo root without excludePatterns.
+- Inspect directory layouts: use bounded `call_mcp_tool(ServerName="filesystem", ToolName="directory_tree", Arguments={"path": "<subpath>", "excludePatterns": [".git", "node_modules", "dist", "build", ".executions", ".workflow", ".codegraph", "target", "vendor"]})`. Target specific subdirectories only, never the repo root without excludePatterns.
 
 Output: numbered architectural findings. Each must name the specific anti-pattern and its consequence. No prose.
 ```
@@ -145,29 +145,29 @@ After all 5 subagents complete:
 
 ## PHASE 3: PLAN FORMALIZATION & PERSISTENCE
 
-The orchestrator synthesizes the Defensible Insight Bundle directly into an atomic, dependency-ordered plan saved to `.ar-wf/planning/`. Each step must be atomic, verifiable, and ordered by dependency.
+The orchestrator synthesizes the Defensible Insight Bundle directly into an atomic, dependency-ordered plan saved to `.workflow/plans/`. Each step must be atomic, verifiable, and ordered by dependency.
 
 ### Mandatory Plan Persistence Rule
-ALWAYS save the finalized plan directly to the workspace `.ar-wf/planning/` folder.
-- Inspect `.ar-wf/planning/` to determine the next sequential two-digit integer prefix `<SEQ>` (e.g., `01`, `02`, ..., `12`).
+ALWAYS save the finalized plan directly to the workspace `.workflow/plans/` folder.
+- Inspect `.workflow/plans/` to determine the next sequential two-digit integer prefix `<SEQ>` (e.g., `01`, `02`, ..., `12`).
 - Current date in `YYYYMMDD` format (e.g. `20260911`).
 - Descriptive kebab-case slug for the plan title.
-- Name the file: `<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g., `.ar-wf/planning/01-20260911-storage-engine-refactor.md`).
+- Name the file: `<SEQ>-YYYYMMDD-<kebab-case>.md` (e.g., `.workflow/plans/01-20260911-storage-engine-refactor.md`).
 - Format each step with checkboxes `[ ]`.
 
 ### 🛑 Hard Stop (No Automatic Execution)
 - Do NOT edit project code.
 - Do NOT run tests or implementation commands.
-- Do NOT scaffold `.ar-wf/hyper-execution/`.
+- Do NOT scaffold `.workflow/executions/`.
 - Your job is strictly to output the plan file and stop.
 - Conclude your message by presenting the plan and informing the user they can execute it with:
-  `/ar-hyperexecution .ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
+  `/hyperexecution .workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
 
 ## OUTPUT FORMAT
 
 ```markdown
-🔥 AR-HYPERPLAN RESULTS
-=======================
+🔥 HYPERPLAN RESULTS
+===================
 
 ## Adversarial Findings (survived the gauntlet)
 [numbered list with member attribution]
@@ -179,8 +179,8 @@ ALWAYS save the finalized plan directly to the workspace `.ar-wf/planning/` fold
 [numbered steps synthesized from insights]
 
 ## Persisted Plan File
-Saved to `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
+Saved to `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
 
 Ready to execute with:
-`/ar-hyperexecution .ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`
+`/hyperexecution .workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`
 ```

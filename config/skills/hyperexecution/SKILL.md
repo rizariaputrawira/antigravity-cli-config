@@ -1,34 +1,34 @@
 ---
-name: ar-hyperexecution
+name: hyperexecution
 description: >-
   Advanced disk-persisted state tracking and autonomous execution for massive,
-  multi-session tasks with built-in Ultrawork discipline (maximum autonomous effort).
-  Uses .ar-wf/planning/*.md checkboxes as the canonical source of truth. Saves evidence to
-  .ar-wf/hyper-execution/evidence/<plan-id>/, appends execution logs to
-  .ar-wf/hyper-execution/ledger.jsonl, and tracks plan-scoped state in
-  .ar-wf/hyper-execution/executions/<plan-id>/state.json. Survives terminal restarts and
-  multi-session handoffs. Integrates with ar-hyperplan, ar-superplan, and ar-flashplan output.
-  Triggers: '/ar-hyperexecution', 'ar-hyperexecution', 'hyperexecution', 'hyper-execution', 'execute plan', 'start work
+  multi-session tasks with built-in Orchestrate discipline (maximum autonomous effort).
+  Uses .workflow/plans/*.md checkboxes as the canonical source of truth. Saves evidence to
+  .workflow/executions/evidence/<plan-id>/, appends execution logs to
+  .workflow/executions/ledger.jsonl, and tracks plan-scoped state in
+  .workflow/executions/runs/<plan-id>/state.json. Survives terminal restarts and
+  multi-session handoffs. Integrates with hyperplan, superplan, and flashplan output.
+  Triggers: '/hyperexecution', 'hyperexecution', 'hyper-execution', 'execute plan', 'start work
   on', 'resume work', 'continue hyperexecution', 'continue boulder',
   'boulder-execution'
 ---
 
-# AR-HYPEREXECUTION — Relentless Disk-Persisted Plan Execution
+# HYPEREXECUTION — Relentless Disk-Persisted Plan Execution
 
-> **MANDATORY**: First action when this skill loads — say "⚡ AR-HYPEREXECUTION ENABLED [ULTRAWORK DISCIPLINE ACTIVE]!" so the user knows relentless, maximum-effort execution started.
+> **MANDATORY**: First action when this skill loads — say "⚡ HYPEREXECUTION ENABLED [ORCHESTRATE DISCIPLINE ACTIVE]!" so the user knows relentless, maximum-effort execution started.
 
 ## Overview
 
-When executing complex plans (3-step ar-flashplan, 5-to-10 step ar-superplan, or 20+ task ar-hyperplan), use the
-**Hyperexecution Pattern** — disk-persisted state combined with **Ultrawork's maximum-effort autonomous execution discipline** that survives terminal restarts and agent handoffs.
+When executing complex plans (3-step flashplan, 5-to-10 step superplan, or 20+ task hyperplan), use the
+**Hyperexecution Pattern** — disk-persisted state combined with **Orchestrate's maximum-effort autonomous execution discipline** that survives terminal restarts and agent handoffs.
 
-**Source of truth**: The `.ar-wf/planning/<plan-id>.md` checkbox file (with automatic fallback to legacy `.planning/<plan-id>.md` if specified or present).
+**Source of truth**: The `.workflow/plans/<plan-id>.md` checkbox file (with automatic fallback to legacy `.planning/<plan-id>.md` if specified or present).
 - `[ ]` = pending
 - `[-]` = in_progress
 - `[x]` = completed
 - `[!]` = blocked / failed
 
-The state file (`.ar-wf/hyper-execution/executions/<plan-id>/state.json`) is a _supplementary
+The state file (`.workflow/executions/runs/<plan-id>/state.json`) is a _supplementary
 tracker_ for metadata (timestamps, retry counts, evidence paths). The plan
 markdown is always authoritative.
 
@@ -37,22 +37,22 @@ markdown is always authoritative.
 ## Directory Structure
 
 ```
-.ar-wf/hyper-execution/
-  executions/
+.workflow/executions/
+  runs/
     <plan-id>/
-      state.json        # Supplementary tracker (NOT source of truth)
-      notes.md          # Single scratchpad: decisions, issues, learnings, blockers
+      state.json          # Supplementary tracker (NOT source of truth)
+      notes.md            # Single scratchpad: decisions, issues, learnings, blockers
   evidence/
     <plan-id>/
       task-<N>/
         report.txt      # Raw verification output
-  ledger.jsonl          # Append-only event log (project root .ar-wf/hyper-execution/)
+  ledger.jsonl          # Append-only event log (project root .workflow/executions/)
 ```
 
 **`<plan-id>`** is the filename stem of the planning file, e.g., for
-`.ar-wf/planning/01-20260911-auth-feature.md` → plan-id = `01-20260911-auth-feature`.
+`.workflow/plans/01-20260911-auth-feature.md` → plan-id = `01-20260911-auth-feature`.
 
-> **`.gitignore` instruction**: On first scaffold, append `.ar-wf/hyper-execution/evidence/` to
+> **`.gitignore` instruction**: On first scaffold, append `.workflow/executions/evidence/` to
 > `.gitignore` if it is not already present. Evidence files are large and
 > volatile — never commit them.
 
@@ -60,13 +60,13 @@ markdown is always authoritative.
 
 ## Canonical Schemas
 
-### `.ar-wf/hyper-execution/executions/<plan-id>/state.json`
+### `.workflow/executions/runs/<plan-id>/state.json`
 
 ```json
 {
   "schema_version": 3,
   "plan_id": "01-20260911-auth-feature",
-  "plan_file": ".ar-wf/planning/01-20260911-auth-feature.md",
+  "plan_file": ".workflow/plans/01-20260911-auth-feature.md",
   "created_at": "<ISO-8601>",
   "updated_at": "<ISO-8601>",
   "tasks": {
@@ -91,14 +91,14 @@ pending → in_progress → completed
                      ↘ blocked (retry_count ≥ 3 OR explicit user block)
 ```
 
-### `.ar-wf/hyper-execution/ledger.jsonl` (append-only, one JSON object per line)
+### `.workflow/executions/ledger.jsonl` (append-only, one JSON object per line)
 
 Each line must be one of:
 
 ```jsonc
 // Task state change
 {"event":"task-started","plan_id":"01-20260911-auth-feature","task":"1","title":"...","ts":"<ISO-8601>"}
-{"event":"task-completed","plan_id":"01-20260911-auth-feature","task":"1","title":"...","commit":"<hash>","evidence":".ar-wf/hyper-execution/evidence/01-20260911-auth-feature/task-1/report.txt","elapsed_ms":12400,"ts":"<ISO-8601>"}
+{"event":"task-completed","plan_id":"01-20260911-auth-feature","task":"1","title":"...","commit":"<hash>","evidence":".workflow/executions/evidence/01-20260911-auth-feature/task-1/report.txt","elapsed_ms":12400,"ts":"<ISO-8601>"}
 {"event":"task-failed","plan_id":"01-20260911-auth-feature","task":"1","retry_count":2,"reason":"...","ts":"<ISO-8601>"}
 {"event":"task-blocked","plan_id":"01-20260911-auth-feature","task":"1","retry_count":3,"reason":"...","ts":"<ISO-8601>"}
 // Recovery events
@@ -106,7 +106,7 @@ Each line must be one of:
 {"event":"user-confirmation","plan_id":"01-20260911-auth-feature","task":"1","result":"yes","ts":"<ISO-8601>"}
 ```
 
-> Ledger path is always `.ar-wf/hyper-execution/ledger.jsonl` — **no subdirectory**. Never
+> Ledger path is always `.workflow/executions/ledger.jsonl` — **no subdirectory**. Never
 > rewrite, truncate, or delete any entry.
 
 ---
@@ -115,27 +115,27 @@ Each line must be one of:
 
 When "start work on [plan]", "hyperexecution [plan]", or "execute plan [plan]":
 
-1. **Locate the plan**: Find `.ar-wf/planning/<plan-id>.md` (or fallback to `.planning/<plan-id>.md` if user explicitly passes legacy path). If multiple plans exist,
-   ask the user which one. If none exist, ask or offer to run `/ar-flashplan`, `/ar-superplan` or `/ar-hyperplan`.
+1. **Locate the plan**: Find `.workflow/plans/<plan-id>.md` (or fallback to `.planning/<plan-id>.md` if user explicitly passes legacy path). If multiple plans exist,
+   ask the user which one. If none exist, ask or offer to run `/flashplan`, `/superplan` or `/hyperplan`.
 
-2. **Scaffold `.ar-wf/hyper-execution/`**:
-   - Create `.ar-wf/hyper-execution/executions/<plan-id>/` if it doesn't exist.
+2. **Scaffold `.workflow/executions/`**:
+   - Create `.workflow/executions/runs/<plan-id>/` if it doesn't exist.
    - Create `state.json` with all tasks parsed from the plan's checkbox lines
      (`[ ]` items), using **numeric sort** on the integer suffix (see Task
      Ordering below).
-   - Create `.ar-wf/hyper-execution/executions/<plan-id>/notes.md` with header:
+   - Create `.workflow/executions/runs/<plan-id>/notes.md` with header:
      ```
      # Notes — <plan-id>
      _Append-only. Never overwrite. Sections: ## Decisions, ## Issues, ## Learnings, ## Blockers_
      ```
-   - Ensure `.ar-wf/hyper-execution/evidence/<plan-id>/` directory exists.
-   - Append `.ar-wf/hyper-execution/evidence/` to `.gitignore` if not already present.
+   - Ensure `.workflow/executions/evidence/<plan-id>/` directory exists.
+   - Append `.workflow/executions/evidence/` to `.gitignore` if not already present.
 
-3. **Announce**: Print a summary of tasks found and their order, declaring Ultrawork discipline active.
+3. **Announce**: Print a summary of tasks found and their order, declaring Orchestrate discipline active.
 
 ---
 
-## Phase 2: Resume / Execution Loop (Ultrawork Driven)
+## Phase 2: Resume / Execution Loop (Orchestrate Driven)
 
 When "resume work", "continue hyperexecution", or during the autonomous loop:
 
@@ -152,27 +152,27 @@ Before executing anything, scan `state.json` for tasks with status
 
 ### 2b. Task Selection
 
-1. Read the `.ar-wf/planning/<plan-id>.md` file (source of truth).
+1. Read the `.workflow/plans/<plan-id>.md` file (source of truth).
 2. Find the lowest-numbered `[ ]` or `[-]` (failed, retry eligible) checkbox
    using **numeric sort** on the integer suffix (see Task Ordering).
 3. If none found:
    - All `[x]` → plan is complete. Announce victory and stop.
    - Only `[!]` remain → announce blocked tasks and ask user how to proceed.
 
-### 2c. Execute Task (Ultrawork Discipline Engine)
+### 2c. Execute Task (Orchestrate Discipline Engine)
 
 1. **Update state**: Set `in_progress` in `state.json`, set `started_at`,
    update checkbox to `[-]`. Append `task-started` to ledger.
-2. **Inject context**: Read `.ar-wf/hyper-execution/executions/<plan-id>/notes.md` and include
+2. **Inject context**: Read `.workflow/executions/runs/<plan-id>/notes.md` and include
    its full contents as context before beginning the task.
-3. **Binary Decomposition (Ultrawork Phase 1)**:
+3. **Binary Decomposition (Orchestrate Phase 1)**:
    - Identify 1–2 explicit, verifiable binary success criteria for the active task (pass/fail).
    - Never accept subjective quality ("looks good"). Must have a concrete command or check that proves completion.
-4. **Autonomous Delegation Heuristic (Ultrawork Phase 2)**:
+4. **Autonomous Delegation Heuristic (Orchestrate Phase 2)**:
    - If a sub-task requires deep exploratory work (>5 tool calls) or is cleanly parallelizable, spawn a focused subagent with read-only state access.
-   - Pass `plan_id`, paths to `.ar-wf/planning/<plan-id>.md`, `notes.md`, and target files (subagent must read `notes.md` before executing).
+   - Pass `plan_id`, paths to `.workflow/plans/<plan-id>.md`, `notes.md`, and target files (subagent must read `notes.md` before executing).
    - Subagents report raw evidence back to the parent orchestrator via message; the parent orchestrator retains exclusive write access to `state.json` and `ledger.jsonl`.
-   - Parent collects returned evidence into `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt` and performs atomic commits.
+   - Parent collects returned evidence into `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt` and performs atomic commits.
 5. **Implement with Discipline**:
    - Apply `test-driven-development` and `systematic-debugging` rules.
    - Refuse to stop prematurely. Loop autonomously until criteria are met.
@@ -190,7 +190,7 @@ Before executing anything, scan `state.json` for tasks with status
 
 ---
 
-## Phase 3: Evidence & Verification (Ultrawork Gate Check)
+## Phase 3: Evidence & Verification (Orchestrate Gate Check)
 
 Before claiming a task is done, **evidence is mandatory**:
 
@@ -205,7 +205,7 @@ Before claiming a task is done, **evidence is mandatory**:
 ### Authoritative Verification Command
 1. Run the verification command defined in the task (tests, build, curl, etc.).
 2. Save the **raw output** using explicit redirection:
-   `<command> > .ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt 2>&1`
+   `<command> > .workflow/executions/evidence/<plan-id>/task-<N>/report.txt 2>&1`
    and verify exit code `$? == 0`.
 
 ### Deterministic Inspection for Non-Executable Tasks
@@ -213,17 +213,17 @@ If a task is documentation, configuration, or structural (no dedicated test suit
 - Do NOT ask the user trivial confirmation questions.
 - Run a deterministic inspection command (e.g. `test -s <file> && grep -Fq '<target>' <file>` or `git diff --stat`) and pipe the output to `report.txt`.
 
-### Ultrawork Gate Check & Circuit Breaker Linkage
+### Orchestrate Gate Check & Circuit Breaker Linkage
 Evaluate the binary success criteria:
 - Are ALL criteria PROVEN with evidence in `report.txt`?
 - **If YES**: Proceed to Phase 4 (Commit & Ledger).
 - **If NO**:
   1. Increment `retry_count` in `state.json`.
-  2. Append a `task-failed` event to `.ar-wf/hyper-execution/ledger.jsonl`.
+  2. Append a `task-failed` event to `.workflow/executions/ledger.jsonl`.
   3. If `retry_count < 3`: Loop back autonomously to Phase 2c to fix the failure. Never self-certify without passing evidence.
   4. If `retry_count >= 3`: Trip the circuit breaker:
      - Set status to `blocked` in `state.json`.
-     - Update checkbox in `.ar-wf/planning/<plan-id>.md` to `[!]`.
+     - Update checkbox in `.workflow/plans/<plan-id>.md` to `[!]`.
      - Append `task-blocked` to ledger and `## Blockers` to `notes.md`.
      - **Escalate to user**:
        > 🚨 Task `<N>` ("title") has failed 3 verification attempts. What would you like to do? [retry / skip / abort]
@@ -240,7 +240,7 @@ Once verified (evidence file shows pass):
    - Set `completed` in `state.json`.
    - Set `ended_at`, compute `elapsed_ms`, record `commit` hash, set
      `evidence_path`.
-   - Update checkbox in `.ar-wf/planning/<plan-id>.md` to `[x]`.
+   - Update checkbox in `.workflow/plans/<plan-id>.md` to `[x]`.
 3. **Append to ledger**: `task-completed` entry with all fields.
 4. **Loop**: Return to Phase 2b for the next pending task.
 
@@ -263,7 +263,7 @@ parse the integer and sort numerically before building the execution queue.
 
 - **Never rewrite** the ledger. It is append-only forever.
 - **Never claim completion** without a physical evidence file in `report.txt`.
-- **Never stop prematurely** in Phase 2c/Phase 3 — loop until the Ultrawork Gate Check is 100% proven or 3 retries trip the circuit breaker.
+- **Never stop prematurely** in Phase 2c/Phase 3 — loop until the Orchestrate Gate Check is 100% proven or 3 retries trip the circuit breaker.
 - **Never ask trivial confirmation questions** when a deterministic shell inspection can verify the change.
 - **Never skip the stale-recovery check** on resume.
 - **Never use lexicographic sort** for task ordering.

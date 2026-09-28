@@ -116,7 +116,7 @@ Write a `SECURITY_AUDIT.md` in the repo root:
 ## Remediation Handoff
 
 Once `SECURITY_AUDIT.md` is generated, transition confirmed vulnerabilities immediately into the Planning Triad:
-- **Point Vulnerabilities (1–2 files, input validation, header additions, secret isolation)**: Launch [`/ar-flashplan`](../ar-flashplan/SKILL.md) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`.
-- **Component Hardening (2–6 files, auth middleware, permission model fixes)**: Launch [`/ar-superplan`](../ar-superplan/SKILL.md) (Builder vs Red Team).
-- **Critical Architectural Flaws (Subsystem trust redesign, crypto migration)**: Launch [`/ar-hyperplan`](../ar-hyperplan/SKILL.md) (5-agent hostile gauntlet).
-- **Verification Proof**: Execute via [`/ar-hyperexecution`](../ar-hyperexecution/SKILL.md) under [`ar-ultrawork`](../ar-ultrawork/SKILL.md) discipline. Every remediation task MUST execute the original PoC to prove the exploit is neutralized, capturing output into `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt`.
+- **Point Vulnerabilities (1–2 files, input validation, header additions, secret isolation)**: Launch [`/flashplan`](../flashplan/SKILL.md) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`.
+- **Component Hardening (2–6 files, auth middleware, permission model fixes)**: Launch [`/superplan`](../superplan/SKILL.md) (Builder vs Red Team).
+- **Critical Architectural Flaws (Subsystem trust redesign, crypto migration)**: Launch [`/hyperplan`](../hyperplan/SKILL.md) (5-agent hostile gauntlet).
+- **Verification Proof**: Execute via [`/hyperexecution`](../hyperexecution/SKILL.md) under [`orchestrate`](../orchestrate/SKILL.md) discipline. Every remediation task MUST execute the original PoC to prove the exploit is neutralized, capturing output into `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`.

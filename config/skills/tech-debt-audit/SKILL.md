@@ -96,7 +96,7 @@ Collect all findings from all subagents. Deduplicate. Rank by impact/effort rati
 ## Phase 3: Remediation Handoff
 
 Once `TECH_DEBT_AUDIT.md` is delivered, route remediation into the Planning Triad:
-- **Quick Wins (<30 min, 1–2 files)**: Launch [`/ar-flashplan`](../ar-flashplan/SKILL.md) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`.
-- **Medium Refactors (2–6 files, dead code pruning, duplicate consolidation)**: Launch [`/ar-superplan`](../ar-superplan/SKILL.md) (Builder vs Red Team).
-- **Architectural Overhauls (Major subsystem decoupling, circular dependency elimination)**: Launch [`/ar-brainstorm`](../ar-brainstorm/SKILL.md) &rarr; [`/ar-hyperplan`](../ar-hyperplan/SKILL.md).
-- **Execution**: Drive remediation via [`/ar-hyperexecution`](../ar-hyperexecution/SKILL.md) under [`ar-ultrawork`](../ar-ultrawork/SKILL.md) discipline, capturing verification proof into `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt`.
+- **Quick Wins (<30 min, 1–2 files)**: Launch [`/flashplan`](../flashplan/SKILL.md) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`.
+- **Medium Refactors (2–6 files, dead code pruning, duplicate consolidation)**: Launch [`/superplan`](../superplan/SKILL.md) (Builder vs Red Team).
+- **Architectural Overhauls (Major subsystem decoupling, circular dependency elimination)**: Launch [`/brainstorm`](../brainstorm/SKILL.md) &rarr; [`/hyperplan`](../hyperplan/SKILL.md).
+- **Execution**: Drive remediation via [`/hyperexecution`](../hyperexecution/SKILL.md) under [`orchestrate`](../orchestrate/SKILL.md) discipline, capturing verification proof into `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`.

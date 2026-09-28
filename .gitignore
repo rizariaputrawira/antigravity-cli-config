@@ -18,6 +18,7 @@ updater/
 cache/
 log/
 *.log
+.impeccable/
 last_check.timestamp
 jetbox_summaries*
 jetski_state*

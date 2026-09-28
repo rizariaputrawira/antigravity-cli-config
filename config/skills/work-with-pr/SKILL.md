@@ -2,7 +2,7 @@
 name: work-with-pr
 description: >-
   Full PR lifecycle skill. Implements a task in a fresh git worktree, drives work through
-  ar-ultrawork and the Planning Triad with ar-hyperexecution, creates a reviewer-readable PR,
+  orchestrate and the Planning Triad with hyperexecution, creates a reviewer-readable PR,
   then runs an unbounded verification loop (CI checks) until the PR is merged. Decomposes large
   tasks into the smallest atomic independently-mergeable PRs and builds independent ones
   concurrently via parallel subagents. Use whenever implementation work needs to land as a PR.
@@ -13,13 +13,13 @@ description: >-
 
 # Work With PR — Full PR Lifecycle
 
-You are executing a complete PR lifecycle: from fresh task-owned worktree setup, through Planning Triad and ar-hyperexecution driven by ar-ultrawork discipline, PR creation, and an unbounded verification loop until the PR is merged.
+You are executing a complete PR lifecycle: from fresh task-owned worktree setup, through Planning Triad and hyperexecution driven by orchestrate discipline, PR creation, and an unbounded verification loop until the PR is merged.
 
 **The unit of delivery is the smallest PR that compiles, passes, and stands on its own — not "one task, one PR."**
 
 ```
 Phase 0: Setup         → Split into atomic PRs, branch + worktree per PR (parallel when independent)
-Phase 1: Implement     → Plan via Planning Triad, execute via ar-hyperexecution under ar-ultrawork
+Phase 1: Implement     → Plan via Planning Triad, execute via hyperexecution under orchestrate
 Phase 2: PR Creation   → Push, create reviewer-readable PR targeting the default branch
 Phase 3: Verify Loop   → Unbounded; a failing gate routes back to Phase 1
   └─ Gate A: CI        → gh pr checks (tests, typecheck, build)
@@ -72,15 +72,15 @@ cd "$WORKTREE_PATH"
 
 ## Phase 1: Implement
 
-Drive all implementation through `ar-ultrawork` and the Planning Triad from inside the worktree:
+Drive all implementation through `orchestrate` and the Planning Triad from inside the worktree:
 
 1. **Sizing & Plan Generation**:
-   - For small, focused changes (1–2 files, 3–5 steps): Trigger `/ar-flashplan` (~3s inline) &rarr; `.ar-wf/planning/<SEQ>-YYYYMMDD-<kebab-case>.md`.
-   - For standard/medium features (2–6 files, 5–10 steps): Trigger `/ar-superplan` (2-agent Builder vs Red Team).
-   - For large/complex PRs (6+ files): Trigger `/ar-hyperplan` (5-agent hostile gauntlet).
-2. **Execution Engine (`ar-hyperexecution`)**:
-   - Drive task checkpoints sequentially via `/ar-hyperexecution` with disk-persisted state (`state.json`).
-   - Capture physical verification outputs to `.ar-wf/hyper-execution/evidence/<plan-id>/task-<N>/report.txt`.
+   - For small, focused changes (1–2 files, 3–5 steps): Trigger `/flashplan` (~3s inline) &rarr; `.workflow/plans/<SEQ>-YYYYMMDD-<kebab-case>.md`.
+   - For standard/medium features (2–6 files, 5–10 steps): Trigger `/superplan` (2-agent Builder vs Red Team).
+   - For large/complex PRs (6+ files): Trigger `/hyperplan` (5-agent hostile gauntlet).
+2. **Execution Engine (`hyperexecution`)**:
+   - Drive task checkpoints sequentially via `/hyperexecution` with disk-persisted state (`state.json`).
+   - Capture physical verification outputs to `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`.
 3. **Evidence-bound QA**: Every task criterion must be proven with concrete evidence (passing tests, clean linter/build, verified outputs) — not assumptions.
 4. **Atomic commits**: Commit after each completed task checkbox: `git commit -m "type(scope): description"`.
 5. **Parallel subagents**: Spawn subagents for independent sub-components within the worktree.

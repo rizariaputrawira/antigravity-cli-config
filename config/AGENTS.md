@@ -25,7 +25,6 @@ Loaded automatically for all conversations in this workspace.
 | `linux-sysadmin` | 'linux-sysadmin', 'sysadmin', 'systemd', 'journalctl', 'selinux', 'firewall' | Host diagnostics, systemd services, rollback preparation, and security baseline safety |
 | `podman-operator` | 'podman-operator', 'podman', 'quadlet', 'rootless container' | Rootless Podman container lifecycle and systemd Quadlet service management |
 | `workflow-health-check` | '/workflow-health-check', 'workflow-health-check', 'wf-doctor', 'wf-repair' | Diagnose and auto-heal workspace workflow conventions and broken/outdated skills |
-| `restart` | '/restart', 'restart agy', 'reload agy', 'restart session' | Gracefully reload active session with agy -c via shell auto-restart wrapper |
 
 ## WORKFLOW STORAGE & NAMING CONVENTIONS
 

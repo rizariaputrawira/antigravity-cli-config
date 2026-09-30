@@ -1,0 +1,43 @@
+{"event":"task-started","plan_id":"02-20260930-adopt-mattpocock-skills","task":"1","title":"Update Global Agent Rules","ts":"2026-09-30T09:26:44+07:00"}
+{"event":"task-started","plan_id":"02-20260930-adopt-mattpocock-skills","task":"1","title":"Update Global Agent Rules","ts":"2026-09-30T09:26:44+07:00"}
+{"event":"task-completed","plan_id":"02-20260930-adopt-mattpocock-skills","task":"1","title":"Update Global Agent Rules","ts":"2026-09-30T09:27:50+07:00"}
+{"event":"task-completed","plan_id":"02-20260930-adopt-mattpocock-skills","task":"2","title":"Enhance brainstorm Skill","ts":"2026-09-30T09:28:16+07:00"}
+{"event":"task-started","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"1","title":"Audit Skill Interactions","ts":"2026-09-30T09:31:21+07:00"}
+{"event":"task-completed","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"1","title":"Audit Skill Interactions","ts":"2026-09-30T09:31:55+07:00"}
+{"event":"task-completed","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"2","title":"Fix Broken Interactions","ts":"2026-09-30T09:31:55+07:00"}
+{"event":"task-started","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"3","title":"Create docs/PLANNING_GUIDE.md","ts":"2026-09-30T09:32:01+07:00"}
+{"event":"task-completed","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"3","title":"Create docs/PLANNING_GUIDE.md","ts":"2026-09-30T09:32:19+07:00"}
+{"event":"task-started","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"4","title":"Update README.md","ts":"2026-09-30T09:32:27+07:00"}
+{"event":"task-completed","plan_id":"03-20260930-super-skill-interaction-and-guide","task":"4","title":"Update README.md","ts":"2026-09-30T09:32:41+07:00"}
+{"event":"task-started","plan_id":"04-20260930-super-create-restart-skill","task":"1","title":"Create scripts/agy-restart.sh","ts":"2026-09-30T09:43:45+07:00"}
+{"event":"task-completed","plan_id":"04-20260930-super-create-restart-skill","task":"1","title":"Create scripts/agy-restart.sh","ts":"2026-09-30T09:44:35+07:00"}
+{"event":"task-started","plan_id":"04-20260930-super-create-restart-skill","task":"2","title":"Create config/skills/restart/SKILL.md","ts":"2026-09-30T09:44:45+07:00"}
+{"event":"task-completed","plan_id":"04-20260930-super-create-restart-skill","task":"2","title":"Create config/skills/restart/SKILL.md","ts":"2026-09-30T09:44:59+07:00"}
+{"event":"task-started","plan_id":"04-20260930-super-create-restart-skill","task":"3","title":"Update install.sh and install.ps1 with Shell Auto-Restart Wrapper","ts":"2026-09-30T09:45:05+07:00"}
+{"event":"task-completed","plan_id":"04-20260930-super-create-restart-skill","task":"3","title":"Update install.sh and install.ps1 with Shell Auto-Restart Wrapper","ts":"2026-09-30T09:46:25+07:00"}
+{"event":"task-started","plan_id":"04-20260930-super-create-restart-skill","task":"4","title":"Update config/AGENTS.md and README.md","ts":"2026-09-30T09:46:29+07:00"}
+{"event":"task-completed","plan_id":"04-20260930-super-create-restart-skill","task":"4","title":"Update config/AGENTS.md and README.md","ts":"2026-09-30T09:46:56+07:00"}
+{"event":"task-started","plan_id":"04-20260930-super-create-restart-skill","task":"5","title":"Run Workflow Health Check and Verification","ts":"2026-09-30T09:47:01+07:00"}
+{"event":"task-completed","plan_id":"04-20260930-super-create-restart-skill","task":"5","title":"Run Workflow Health Check and Verification","ts":"2026-09-30T09:47:20+07:00"}
+{"event":"task-started","plan_id":"05-20260930-hyper-robust-session-restart","task":"1","title":"Clean Up Dotfiles & Update Installers","ts":"2026-09-30T10:05:05+07:00"}
+{"event":"task-completed","plan_id":"05-20260930-hyper-robust-session-restart","task":"1","title":"Clean Up Dotfiles & Update Installers","ts":"2026-09-30T10:05:54+07:00"}
+{"event":"task-started","plan_id":"05-20260930-hyper-robust-session-restart","task":"2","title":"Deploy Executable Shim & Streamline Restart Helper","ts":"2026-09-30T10:06:00+07:00"}
+{"event":"task-completed","plan_id":"05-20260930-hyper-robust-session-restart","task":"2","title":"Deploy Executable Shim & Streamline Restart Helper","ts":"2026-09-30T10:06:55+07:00"}
+{"event":"task-started","plan_id":"05-20260930-hyper-robust-session-restart","task":"3","title":"End-to-End Verification & Health Check","ts":"2026-09-30T10:07:05+07:00"}
+{"event":"task-completed","plan_id":"05-20260930-hyper-robust-session-restart","task":"3","title":"End-to-End Verification & Health Check","ts":"2026-09-30T10:07:35+07:00"}
+{"event":"task-started","plan_id":"06-20260930-flash-async-restart-signal","task":"1","title":"Add Asynchronous Signal Delay to scripts/agy-restart.sh","ts":"2026-09-30T10:13:30+07:00"}
+{"event":"task-completed","plan_id":"06-20260930-flash-async-restart-signal","task":"1","title":"Add Asynchronous Signal Delay to scripts/agy-restart.sh","ts":"2026-09-30T10:13:58+07:00"}
+{"event":"task-started","plan_id":"06-20260930-flash-async-restart-signal","task":"2","title":"Verify Supervisor Shim Active Binding & Health Check","ts":"2026-09-30T10:14:02+07:00"}
+{"event":"task-completed","plan_id":"06-20260930-flash-async-restart-signal","task":"2","title":"Verify Supervisor Shim Active Binding & Health Check","ts":"2026-09-30T10:14:15+07:00"}
+{"event":"task-started","plan_id":"07-20260930-flash-direct-restart-signal","task":"1","title":"Restore Direct Synchronous Termination in scripts/agy-restart.sh","ts":"2026-09-30T10:31:30+07:00"}
+{"event":"task-completed","plan_id":"07-20260930-flash-direct-restart-signal","task":"1","title":"Restore Direct Synchronous Termination in scripts/agy-restart.sh","ts":"2026-09-30T10:31:55+07:00"}
+{"event":"task-started","plan_id":"07-20260930-flash-direct-restart-signal","task":"2","title":"Workflow Health Check Verification","ts":"2026-09-30T10:32:05+07:00"}
+{"event":"task-completed","plan_id":"07-20260930-flash-direct-restart-signal","task":"2","title":"Workflow Health Check Verification","ts":"2026-09-30T10:32:17+07:00"}
+{"event":"task-started","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"1","title":"Restore Original Binary and Remove Restart Scripts","ts":"2026-09-30T10:47:25+07:00"}
+{"event":"task-completed","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"1","title":"Restore Original Binary and Remove Restart Scripts","ts":"2026-09-30T10:47:40+07:00"}
+{"event":"task-started","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"2","title":"Delete Restart Skill Definitions","ts":"2026-09-30T10:47:47+07:00"}
+{"event":"task-completed","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"2","title":"Delete Restart Skill Definitions","ts":"2026-09-30T10:48:10+07:00"}
+{"event":"task-started","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"3","title":"Clean Up References in Docs and Installers","ts":"2026-09-30T10:48:15+07:00"}
+{"event":"task-completed","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"3","title":"Clean Up References in Docs and Installers","ts":"2026-09-30T10:51:22+07:00"}
+{"event":"task-started","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"4","title":"End-to-End Verification and Workflow Health Check","ts":"2026-09-30T10:51:22+07:00"}
+{"event":"task-completed","plan_id":"08-20260930-flash-revert-delete-restart-skill","task":"4","title":"End-to-End Verification and Workflow Health Check","ts":"2026-09-30T10:52:08+07:00"}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "plan_id": "03-20260930-super-skill-interaction-and-guide",
+  "plan_file": ".workflow/plans/03-20260930-super-skill-interaction-and-guide.md",
+  "created_at": "$(date -Iseconds)",
+  "updated_at": "2026-09-30T09:32:41+07:00",
+  "tasks": {
+    "1": {
+      "title": "Audit Skill Interactions",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:31:21+07:00",
+      "ended_at": "2026-09-30T09:31:55+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "2": {
+      "title": "Fix Broken Interactions",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": null,
+      "ended_at": "2026-09-30T09:31:55+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "3": {
+      "title": "Create docs/PLANNING_GUIDE.md",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:32:01+07:00",
+      "ended_at": "2026-09-30T09:32:19+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "4": {
+      "title": "Update README.md",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:32:27+07:00",
+      "ended_at": "2026-09-30T09:32:41+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    }
+  }
+}

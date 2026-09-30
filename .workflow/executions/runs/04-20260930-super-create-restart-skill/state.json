@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "plan_id": "04-20260930-super-create-restart-skill",
+  "plan_file": ".workflow/plans/04-20260930-super-create-restart-skill.md",
+  "created_at": "$(date -Iseconds)",
+  "updated_at": "2026-09-30T09:47:20+07:00",
+  "tasks": {
+    "1": {
+      "title": "Create scripts/agy-restart.sh",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:43:45+07:00",
+      "ended_at": "2026-09-30T09:44:35+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "2": {
+      "title": "Create config/skills/restart/SKILL.md",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:44:45+07:00",
+      "ended_at": "2026-09-30T09:44:59+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "3": {
+      "title": "Update install.sh and install.ps1 with Shell Auto-Restart Wrapper",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:45:05+07:00",
+      "ended_at": "2026-09-30T09:46:25+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "4": {
+      "title": "Update config/AGENTS.md and README.md",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:46:29+07:00",
+      "ended_at": "2026-09-30T09:46:56+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "5": {
+      "title": "Run Workflow Health Check and Verification",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T09:47:01+07:00",
+      "ended_at": "2026-09-30T09:47:20+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    }
+  }
+}

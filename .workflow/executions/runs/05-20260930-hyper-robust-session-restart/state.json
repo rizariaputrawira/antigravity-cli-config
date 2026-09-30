@@ -1,0 +1,39 @@
+{
+  "schema_version": 3,
+  "plan_id": "05-20260930-hyper-robust-session-restart",
+  "plan_file": ".workflow/plans/05-20260930-hyper-robust-session-restart.md",
+  "created_at": "$(date -Iseconds)",
+  "updated_at": "2026-09-30T10:07:35+07:00",
+  "tasks": {
+    "1": {
+      "title": "Clean Up Dotfiles & Update Installers",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T10:05:05+07:00",
+      "ended_at": "2026-09-30T10:05:54+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "2": {
+      "title": "Deploy Executable Shim & Streamline Restart Helper",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T10:06:00+07:00",
+      "ended_at": "2026-09-30T10:06:55+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    },
+    "3": {
+      "title": "End-to-End Verification & Health Check",
+      "status": "completed",
+      "retry_count": 0,
+      "started_at": "2026-09-30T10:07:05+07:00",
+      "ended_at": "2026-09-30T10:07:35+07:00",
+      "elapsed_ms": null,
+      "evidence_path": null,
+      "commit": null
+    }
+  }
+}

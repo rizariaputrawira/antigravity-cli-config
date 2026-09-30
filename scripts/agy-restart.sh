@@ -73,8 +73,12 @@ echo "🔄 Restarting Antigravity CLI session (${RESTART_ARGS:-fresh})..."
 echo "============================================================"
 
 if [ -n "${AGY_PID}" ]; then
-  echo "  ✅ Terminating active session PID ${AGY_PID}..."
-  kill -TERM "${AGY_PID}" 2>/dev/null || kill -9 "${AGY_PID}" 2>/dev/null || true
+  echo "  ✅ Scheduled clean session restart for PID ${AGY_PID}..."
+  if command -v setsid >/dev/null 2>&1; then
+    setsid -f bash -c "sleep 0.8 && (kill -TERM '${AGY_PID}' 2>/dev/null || kill -9 '${AGY_PID}' 2>/dev/null || true)" >/dev/null 2>&1
+  else
+    python3 -c "import subprocess; subprocess.Popen(['bash', '-c', 'sleep 0.8 && (kill -TERM ${AGY_PID} 2>/dev/null || kill -9 ${AGY_PID} 2>/dev/null || true)'], start_new_session=True)"
+  fi
 else
   echo "⚠️ Note: Could not detect parent agy process PID."
   echo "   Signal file created at ${SIGNAL_FILE}."

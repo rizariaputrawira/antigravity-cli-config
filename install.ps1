@@ -178,6 +178,45 @@ if (Test-Path $SrcScriptsDir) {
     Copy-Item -Path (Join-Path $SrcScriptsDir "*") -Destination $TargetScriptsDir -Recurse -Force
 }
 
+# 6. Shell Integration (Auto-Restart Wrapper for PowerShell /restart skill)
+Write-Host "🐚 Checking PowerShell profile for agy auto-restart wrapper..." -ForegroundColor Cyan
+$PsWrapperComment = "# Antigravity CLI auto-restart wrapper"
+$PsWrapperCode = @"
+
+$PsWrapperComment
+function agy {
+    while (`$true) {
+        `$restartFile = Join-Path `$HOME ".gemini\antigravity-cli\.restart_signal"
+        if (Test-Path `$restartFile) { Remove-Item `$restartFile -Force -ErrorAction SilentlyContinue }
+        & (Get-Command -CommandType Application agy) @args
+        `$code = `$LASTEXITCODE
+        if (Test-Path `$restartFile) {
+            `$rArgs = Get-Content `$restartFile -ErrorAction SilentlyContinue
+            Remove-Item `$restartFile -Force -ErrorAction SilentlyContinue
+            Write-Host "🔄 Restarting Antigravity CLI (`$rArgs)..." -ForegroundColor Cyan
+            `$args = if (`$rArgs) { `$rArgs.Split(' ') } else { @("-c") }
+            continue
+        }
+        return `$code
+    }
+}
+"@
+
+if ($PROFILE) {
+    try {
+        $ProfileDir = Split-Path -Parent $PROFILE
+        if (-not (Test-Path $ProfileDir)) { New-Item -ItemType Directory -Path $ProfileDir -Force | Out-Null }
+        if (-not (Test-Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force | Out-Null }
+        $CurrentProfile = Get-Content -Raw -Path $PROFILE -ErrorAction SilentlyContinue
+        if (-not $CurrentProfile -or -not ($CurrentProfile.Contains($PsWrapperComment))) {
+            Add-Content -Path $PROFILE -Value $PsWrapperCode -Encoding utf8
+            Write-Host "  ✨ Added auto-restart wrapper to $PROFILE" -ForegroundColor Cyan
+        }
+    } catch {
+        Write-Host "  ⚠️ Notice: Could not update PowerShell profile automatically." -ForegroundColor Yellow
+    }
+}
+
 # Cleanup temp files if remote
 if ($TempDir -and (Test-Path $TempDir)) {
     Remove-Item -Path $TempDir -Recurse -Force -ErrorAction SilentlyContinue

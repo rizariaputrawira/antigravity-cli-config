@@ -205,6 +205,36 @@ if [ -d "${SRC_DIR}/scripts" ]; then
   chmod +x "${CONFIG_DIR}/scripts/"*.sh 2>/dev/null || true
 fi
 
+# 6. Shell Integration (Auto-Restart Wrapper for /restart skill)
+echo "🐚 Checking shell configuration for agy auto-restart wrapper..."
+WRAPPER_COMMENT="# Antigravity CLI auto-restart wrapper"
+WRAPPER_CODE="${WRAPPER_COMMENT}
+agy() {
+  while true; do
+    rm -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || true
+    command agy \"\$@\"
+    local _code=\$?
+    if [ -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" ]; then
+      local _args
+      _args=\$(cat \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || echo '-c')
+      rm -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || true
+      echo \"🔄 Restarting Antigravity CLI (\${_args})...\"
+      # shellcheck disable=SC2086
+      set -- \${_args}
+      continue
+    fi
+    return \$_code
+  done
+}"
+
+for rc_file in "${HOME}/.bashrc" "${HOME}/.zshrc"; do
+  if [ -f "${rc_file}" ] && ! grep -Fq "${WRAPPER_COMMENT}" "${rc_file}"; then
+    echo "" >> "${rc_file}"
+    echo "${WRAPPER_CODE}" >> "${rc_file}"
+    echo "  ✨ Added auto-restart wrapper to ${rc_file}"
+  fi
+done
+
 echo ""
 echo "============================================================"
 echo "🎉 Antigravity configuration successfully installed!"

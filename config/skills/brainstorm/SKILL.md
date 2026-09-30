@@ -194,6 +194,7 @@ When exploring complex architectural domains where multiple design decisions dep
 - Ensure directory exists: `mkdir -p .workflow/brainstorm`
 - Determine sequential identifier `<SEQ>`: Inspect `.workflow/brainstorm/` for existing files matching `[0-9]{2}-*`, find the highest two-digit sequence, and increment by 1 (default `01` if empty or none).
 - Write the validated design (spec) to `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md` (e.g., `.workflow/brainstorm/01-20260911-auth-service-design.md`), including architecture, components, and the Settled Decisions & Answers ledger.
+- **Fog of War Mapping**: The spec document MUST explicitly separate the **actionable frontier** (work that can be planned now) from **unspecifiable future work** (fog). Do not attempt to specify the fog.
 - Filename must be strictly lowercase kebab-case.
 - Commit the design document to git.
 

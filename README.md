@@ -93,6 +93,13 @@ antigravity-config/
 
 ---
 
+
+## 🧠 Autonomous Planning & Orchestration
+
+This configuration ships with a robust **Multi-Tier Orchestration Architecture** to manage autonomous agent lifecycles, ensuring rigorous validation and preventing hallucinations or infinite loops.
+
+For a comprehensive guide on how the planning, execution, and state-tracking mechanisms (`/flashplan`, `/superplan`, `/hyperplan`, `/hyperexecution`, and `/orchestrate`) interact, see the [Planning & Execution Workflow Guide](docs/PLANNING_GUIDE.md).
+
 ## 🩺 Workflow Health Check & Auto-Repair
 
 When switching devices, pulling updates, or working in projects created under legacy conventions (`.ar-wf/`, `.planning/`, deprecated `ar-*` skills), run `/workflow-health-check` or the automated CLI tool:

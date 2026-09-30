@@ -25,12 +25,14 @@ Loaded automatically for all conversations in this workspace.
 | `linux-sysadmin` | 'linux-sysadmin', 'sysadmin', 'systemd', 'journalctl', 'selinux', 'firewall' | Host diagnostics, systemd services, rollback preparation, and security baseline safety |
 | `podman-operator` | 'podman-operator', 'podman', 'quadlet', 'rootless container' | Rootless Podman container lifecycle and systemd Quadlet service management |
 | `workflow-health-check` | '/workflow-health-check', 'workflow-health-check', 'wf-doctor', 'wf-repair' | Diagnose and auto-heal workspace workflow conventions and broken/outdated skills |
+| `to-spec` | '/to-spec', 'to-spec', 'write spec', 'create spec' | Synthesize conversation or brainstorm into a structured spec at `.workflow/specs/` |
 
 ## WORKFLOW STORAGE & NAMING CONVENTIONS
 
 All workflow artifacts are persisted under `.workflow/`:
 - **Plans**: `.workflow/plans/<SEQ>-YYYYMMDD-<tier>-<kebab-case>.md` (e.g. `01-20260911-flash-add-flag.md`)
 - **Brainstorm Specs**: `.workflow/brainstorm/<SEQ>-YYYYMMDD-<kebab-case>-design.md`
+- **Specs**: `.workflow/specs/<SEQ>-YYYYMMDD-<kebab-case>-spec.md`
 - **Execution FSM & Notes**: `.workflow/executions/runs/<plan-id>/state.json`, `notes.md`
 - **Verification Evidence**: `.workflow/executions/evidence/<plan-id>/task-<N>/report.txt`
 - **Audit Ledger**: `.workflow/executions/ledger.jsonl`

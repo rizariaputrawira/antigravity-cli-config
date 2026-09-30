@@ -68,6 +68,13 @@ Before implementing anything non-trivial:
 3. Understand the patterns used in this codebase
 4. Propose the approach before executing
 
+
+### 8. Writing for Agents
+When writing plans, prompts, or documentation consumed by agents:
+- **Progressive Disclosure**: Hide downstream steps from early execution phases to prevent premature completion.
+- **Leading Words**: Use dense, pretrained terminology (e.g. "tracer bullets", "fog of war") rather than full sentences to anchor behavior efficiently.
+- **Positive Framing**: State the target behavior positively ("write one-line comments") rather than negating the forbidden one ("don't write long comments").
+
 ## WORK MODES
 
 ### Standard Mode (default)

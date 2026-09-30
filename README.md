@@ -4,7 +4,7 @@ A complete, battle-tested, portable configuration distribution for [Google Antig
 
 This repository packages:
 - 🧠 **Global Rules & Workflows**: The `oh-my-antigravity` framework, Ponytail minimization heuristics, atomic commits, and host safety protocols.
-- 🛠️ **29 Custom Skills**: Advanced planning suites (`orchestrate`, `hyperplan`, `superplan`, `flashplan`, `hyperexecution`, `brainstorm`, `workflow-health-check`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
+- 🛠️ **30 Custom Skills**: Advanced planning suites (`orchestrate`, `hyperplan`, `superplan`, `flashplan`, `hyperexecution`, `brainstorm`, `to-spec`, `workflow-health-check`), code quality audits (`tech-debt-audit`, `security-research`), debugging tools (`systematic-debugging`, `test-driven-development`), and system administration (`linux-sysadmin`, `podman-operator`, `bash-scripting`).
 - 🔌 **5 Built-in MCP Servers**: Pre-configured stdio integrations for `context7`, `github`, `filesystem`, `codegraph`, and `lsp`.
 - 🛡️ **Lifecycle Hooks**: Automated git command safety guards (`git-safety`) and session banner notifications.
 - ⚡ **Optimized Performance Settings**: Pre-configured execution policies (`always-proceed`), artifact review (`agent-decides`), and pinned model tier.
@@ -99,6 +99,8 @@ antigravity-config/
 This configuration ships with a robust **Multi-Tier Orchestration Architecture** to manage autonomous agent lifecycles, ensuring rigorous validation and preventing hallucinations or infinite loops.
 
 For a comprehensive guide on how the planning, execution, and state-tracking mechanisms (`/flashplan`, `/superplan`, `/hyperplan`, `/hyperexecution`, and `/orchestrate`) interact, see the [Planning & Execution Workflow Guide](docs/PLANNING_GUIDE.md).
+
+The full canonical pipeline is: **`/brainstorm`** → **`/to-spec`** → **`/superplan`** or **`/hyperplan`** → **`/hyperexecution`**. After a brainstorm session, run `/to-spec` to crystallize the approved design into a structured spec at `.workflow/specs/`; then pass the spec path directly to a planning skill (e.g. `/superplan .workflow/specs/01-…-spec.md`). Each stage is optional — you can also plan directly from chat context without a prior brainstorm or spec.
 
 ## 🩺 Workflow Health Check & Auto-Repair
 

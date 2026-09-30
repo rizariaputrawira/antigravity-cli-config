@@ -58,7 +58,7 @@ The orchestrator synthesizes both passes into an atomic, dependency-ordered plan
 
 ## PHASE 0: SETUP
 
-Confirm the task or objective to plan. If underspecified, clarify the goal, target files, and constraints with the user before spawning agents.
+Confirm the task or objective to plan. If a spec or brainstorm path was passed as an argument (e.g. `/superplan .workflow/specs/01-…-spec.md`), read it first to ground the task; otherwise use active conversation context. If underspecified, clarify the goal, target files, and constraints with the user before spawning agents.
 
 ---
 

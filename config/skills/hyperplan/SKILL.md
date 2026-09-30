@@ -35,7 +35,7 @@ This is not consensus building. This is intellectual combat. Weakness gets expos
 
 ## PHASE 0: SETUP
 
-Verify you have a concrete task or question to plan. If not, ask the user: "What should we hyperplan? Give me the task, proposal, or question to subject to adversarial review."
+Verify you have a concrete task or question to plan. If a spec or brainstorm path was passed as an argument (e.g. `/hyperplan .workflow/specs/01-…-spec.md`), read it first; otherwise use active conversation context. If not, ask the user: "What should we hyperplan? Give me the task, proposal, or question to subject to adversarial review."
 
 ## PHASE 1: SPAWN THE ADVERSARIAL TEAM
 

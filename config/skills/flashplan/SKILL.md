@@ -62,6 +62,7 @@ If during codebase grounding or step formulation you find the task requires **>5
 ## PHASE 0: CODEBASE GROUNDING (RAPID CHECK)
 
 Before formulating the plan, perform a targeted inspection of the target file(s):
+- **Context Resolution**: If a spec or brainstorm path was passed as an argument (e.g. `/flashplan .workflow/specs/01-…-spec.md`), read it first. Otherwise plan from active conversation context.
 - Prioritize querying local MCP `call_mcp_tool(ServerName="codegraph", ToolName="codegraph_explore", Arguments={"query": "<target symbol/flow>", "projectPath": "<dir>"})` to retrieve verbatim source, call paths, and relevant imports in a single round trip.
 - Bulk file reading via `read_multiple_files` is strictly banned in Phase 0 to preserve the ~3s SLA.
 - If querying local LSP tools (`lsp_document_symbols`, `lsp_definition`), all line and character coordinates MUST be 0-indexed (`lsp_line = line - 1`), converting from 1-indexed editor/grep lines.

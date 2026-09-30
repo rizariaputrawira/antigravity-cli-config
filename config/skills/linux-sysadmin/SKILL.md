@@ -38,11 +38,14 @@ ufw status verbose
 
 ## Safety Rules
 
-- Never disable SELinux as a default fix.
-- Never rotate SSH keys or change `sshd_config` without rollback.
-- Never modify firewall rules without confirming active firewall stack.
+- Never disable SELinux or firewalls as a default fix.
 - Prefer systemd drop-ins over editing packaged unit files.
 - Preserve ownership, permissions, ACLs, mount options, and labels.
+
+### Remote Execution & SSH Safety
+- **Client Multiplexing**: When executing multiple SSH commands to a remote host, establish a master connection (`ControlMaster auto`, `ControlPath ~/.ssh/sockets/%r@%h-%p`, `ControlPersist 10m`) to eliminate handshake latency. Close with `ssh -O exit -o ControlPath=... <host>` upon completion.
+- **Server Changes & Rollback**: Before modifying OpenSSH configs (`sshd_config` or `sshd_config.d/`), validate syntax with `sshd -t`, verify effective settings with `sshd -T`, and test a new independent connection before closing existing sessions.
+- **Connection Exemptions**: For high-concurrency servers with `PerSourcePenalties`, place client IP in `PerSourcePenaltyExemptList` within `/etc/ssh/sshd_config.d/00-exemptions.conf` (chmod 600).
 
 ## Validation
 

@@ -47,10 +47,4 @@ If you want the entire lifecycle managed autonomously, use the Conductor.
   3. Handoff: Seamlessly passes the generated plan to `hyperexecution`.
   4. Loop: Drives the execution engine relentlessly until all checkboxes are proven green with physical evidence.
 
----
 
-### Best Practices
-
-- **Never bypass planning**: Even for small bug fixes, run `/flashplan` to enforce verification gates.
-- **Review before execution**: The gap between the planning tier and `hyperexecution` is your chance to review the `.workflow/plans/` markdown file. You can manually edit the plan (add steps, remove steps) before typing "start work".
-- **Resume fearlessly**: If your terminal crashes or you need to switch devices, simply type "resume work". The local `.workflow/` FSM will pick up exactly where it left off, recovering any stale tasks.

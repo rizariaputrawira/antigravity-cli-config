@@ -205,35 +205,51 @@ if [ -d "${SRC_DIR}/scripts" ]; then
   chmod +x "${CONFIG_DIR}/scripts/"*.sh 2>/dev/null || true
 fi
 
-# 6. Shell Integration (Auto-Restart Wrapper for /restart skill)
-echo "🐚 Checking shell configuration for agy auto-restart wrapper..."
-WRAPPER_COMMENT="# Antigravity CLI auto-restart wrapper"
-WRAPPER_CODE="${WRAPPER_COMMENT}
-agy() {
-  while true; do
-    rm -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || true
-    command agy \"\$@\"
-    local _code=\$?
-    if [ -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" ]; then
-      local _args
-      _args=\$(cat \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || echo '-c')
-      rm -f \"\${HOME}/.gemini/antigravity-cli/.restart_signal\" 2>/dev/null || true
-      echo \"🔄 Restarting Antigravity CLI (\${_args})...\"
-      # shellcheck disable=SC2086
-      set -- \${_args}
-      continue
-    fi
-    return \$_code
-  done
-}"
+# 6. Executable Shim Integration (Seamless /restart Supervisor)
+AGY_BIN_PATH="$(command -v agy 2>/dev/null || echo "${HOME}/.local/bin/agy")"
+if [ -f "${AGY_BIN_PATH}" ]; then
+  if file "${AGY_BIN_PATH}" 2>/dev/null | grep -Eq "ELF|executable"; then
+    echo "⚙️ Configuring supervisory restart shim for ${AGY_BIN_PATH}..."
+    REAL_BIN="${AGY_BIN_PATH}.real"
+    mv "${AGY_BIN_PATH}" "${REAL_BIN}"
+    
+    cat << 'SHIM_EOF' > "${AGY_BIN_PATH}"
+#!/usr/bin/env bash
+# Antigravity CLI Supervisor Shim
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REAL_BIN="${SCRIPT_DIR}/agy.real"
+SIGNAL_FILE="${HOME}/.gemini/antigravity-cli/.restart_signal"
 
-for rc_file in "${HOME}/.bashrc" "${HOME}/.zshrc"; do
-  if [ -f "${rc_file}" ] && ! grep -Fq "${WRAPPER_COMMENT}" "${rc_file}"; then
-    echo "" >> "${rc_file}"
-    echo "${WRAPPER_CODE}" >> "${rc_file}"
-    echo "  ✨ Added auto-restart wrapper to ${rc_file}"
+while true; do
+  rm -f "${SIGNAL_FILE}" 2>/dev/null || true
+  START_TS=$(date +%s)
+  "${REAL_BIN}" "$@"
+  EXIT_CODE=$?
+  END_TS=$(date +%s)
+  
+  if [ -f "${SIGNAL_FILE}" ]; then
+    ARGS="$(cat "${SIGNAL_FILE}" 2>/dev/null || echo '-c')"
+    rm -f "${SIGNAL_FILE}" 2>/dev/null || true
+    stty sane 2>/dev/null || true
+    
+    # Circuit breaker: abort if session lived < 2s to prevent crash loops
+    if [ $((END_TS - START_TS)) -lt 2 ]; then
+      echo "⚠️ Session terminated in less than 2s. Aborting restart loop." >&2
+      exit "${EXIT_CODE}"
+    fi
+    
+    echo "🔄 Restarting Antigravity CLI (${ARGS})..."
+    # shellcheck disable=SC2086
+    set -- ${ARGS}
+    continue
   fi
+  exit "${EXIT_CODE}"
 done
+SHIM_EOF
+    chmod +x "${AGY_BIN_PATH}"
+    echo "  ✅ Supervisory shim active at ${AGY_BIN_PATH}"
+  fi
+fi
 
 echo ""
 echo "============================================================"

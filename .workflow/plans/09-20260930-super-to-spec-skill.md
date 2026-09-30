@@ -6,7 +6,7 @@
 
 ---
 
-- [ ] **Step 1: Create `config/skills/to-spec/SKILL.md`**
+- [x] **Step 1: Create `config/skills/to-spec/SKILL.md`**
 
   Create the new skill file following existing YAML frontmatter + PHASE conventions.
 
@@ -120,7 +120,7 @@
 
 ---
 
-- [ ] **Step 2: Edit `config/skills/brainstorm/SKILL.md` — add `/to-spec` transition**
+- [x] **Step 2: Edit `config/skills/brainstorm/SKILL.md` — add `/to-spec` transition**
 
   **Location**: After line 216 (`Wait for the user's response. Proceed only once approved.`),
   insert before the existing `**Transition to Implementation Planning:**` paragraph (line 218).
@@ -140,7 +140,7 @@
 
 ---
 
-- [ ] **Step 3: Edit flashplan + superplan + hyperplan — add Context Resolution line (one pass each)**
+- [x] **Step 3: Edit flashplan + superplan + hyperplan — add Context Resolution line (one pass each)**
 
   **flashplan** (`config/skills/flashplan/SKILL.md`):
   - Location: After line 63 (the "Before formulating the plan, perform a targeted inspection..." sentence)
@@ -178,7 +178,7 @@
 
 ---
 
-- [ ] **Step 4: Edit `config/AGENTS.md` — add `to-spec` row + storage bullet**
+- [x] **Step 4: Edit `config/AGENTS.md` — add `to-spec` row + storage bullet**
 
   **Edit 1 — Skills table** (after line 27, last row `workflow-health-check`):
   ```markdown
@@ -202,7 +202,7 @@
 
 ---
 
-- [ ] **Step 5: Edit `README.md` — add pipeline paragraph + update skill count**
+- [x] **Step 5: Edit `README.md` — add pipeline paragraph + update skill count**
 
   **Edit 1 — Pipeline paragraph** (after line 101, before `## 🩺 Workflow Health Check`):
   ```markdown
@@ -226,7 +226,7 @@
 
 ---
 
-- [ ] **Step 6: Commit all changes + verify full installation**
+- [x] **Step 6: Commit all changes + verify full installation**
 
   ```bash
   git add config/skills/to-spec/ \

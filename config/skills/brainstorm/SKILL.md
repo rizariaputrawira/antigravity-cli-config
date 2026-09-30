@@ -215,6 +215,8 @@ After the spec review passes, ask the user to review the written spec:
 
 Wait for the user's response. Proceed only once approved.
 
+> 💡 **Optional next step**: Run `/to-spec` to synthesize the approved design into a formal, referenceable spec at `.workflow/specs/` before planning.
+
 **Transition to Implementation Planning:**
 
 - Invoke `/superplan` (for medium architectures, 2–6 files) or `/hyperplan` (for large/adversarial planning) passing the spec path.

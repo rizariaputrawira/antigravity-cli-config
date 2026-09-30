@@ -73,7 +73,9 @@ echo "🔄 Restarting Antigravity CLI session (${RESTART_ARGS:-fresh})..."
 echo "============================================================"
 
 if [ -n "${AGY_PID}" ]; then
-  kill -TERM "${AGY_PID}" 2>/dev/null || true
+  # Delay termination by 0.5s in background subshell so active tool execution finishes cleanly
+  (sleep 0.5 && kill -TERM "${AGY_PID}" 2>/dev/null || true) & disown
+  echo "  ✅ Scheduled graceful termination for PID ${AGY_PID} (in 500ms)..."
 else
   echo "⚠️ Note: Could not detect parent agy process PID."
   echo "   Signal file created at ${SIGNAL_FILE}."

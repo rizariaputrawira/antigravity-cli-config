@@ -112,6 +112,12 @@ When switching devices, pulling updates, or working in projects created under le
 ./scripts/workflow-health-check.sh --fix
 ```
 
+## 🔄 Session Auto-Restart (`/restart`)
+
+When modifying skills, adding MCP servers, updating rules, or clearing UI state, type `/restart` directly inside `agy`:
+- Gracefully signals the active `agy` process to exit.
+- Outer shell wrapper (configured in `~/.bashrc`, `~/.zshrc`, or PowerShell `$PROFILE` via `install.sh` / `install.ps1`) intercepts `.restart_signal` and automatically re-executes `agy -c` in the same terminal.
+
 ---
 
 ## 🔄 Updating Your Devices
